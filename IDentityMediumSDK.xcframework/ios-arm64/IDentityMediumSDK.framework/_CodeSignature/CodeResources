@@ -4,9 +4,101 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>DocDetectionTrainingModel_UNIQUE_KEY_ID_3033_20220530113226.tflite</key>
+		<key>Assets.car</key>
 		<data>
-		6PZXAoO6vdRIN9DjqSragPY2n+A=
+		UlPz8MM027ZxGRQs/gCzrzkgNRw=
+		</data>
+		<key>DocDetectionTrainingModel_UNIQUE_KEY_ID_4183_20220825033033.tflite</key>
+		<data>
+		QkJKEdTmA9QeZvfPW73oul/M17o=
+		</data>
+		<key>DocumentCapture.storyboardc/1Pk-oV-bqy-view-n8U-9k-eXr.nib/objects-14.0+.nib</key>
+		<data>
+		/Cbp1RXTwSGi4ZQEGfVlBhcqXsc=
+		</data>
+		<key>DocumentCapture.storyboardc/1Pk-oV-bqy-view-n8U-9k-eXr.nib/runtime.nib</key>
+		<data>
+		/Cbp1RXTwSGi4ZQEGfVlBhcqXsc=
+		</data>
+		<key>DocumentCapture.storyboardc/DocumentCaptureInstructionsViewController.nib/objects-14.0+.nib</key>
+		<data>
+		qdAINfL9N7NBVQpILPgK9UhgXEU=
+		</data>
+		<key>DocumentCapture.storyboardc/DocumentCaptureInstructionsViewController.nib/runtime.nib</key>
+		<data>
+		qdAINfL9N7NBVQpILPgK9UhgXEU=
+		</data>
+		<key>DocumentCapture.storyboardc/DocumentCapturePreviewViewController.nib/objects-14.0+.nib</key>
+		<data>
+		vqfFct/JbdGLozBj4pdHG5XcdQc=
+		</data>
+		<key>DocumentCapture.storyboardc/DocumentCapturePreviewViewController.nib/runtime.nib</key>
+		<data>
+		vqfFct/JbdGLozBj4pdHG5XcdQc=
+		</data>
+		<key>DocumentCapture.storyboardc/DocumentCaptureViewController.nib/objects-14.0+.nib</key>
+		<data>
+		BkJzEyL4dpeNmDmgpdlv4xyzsic=
+		</data>
+		<key>DocumentCapture.storyboardc/DocumentCaptureViewController.nib/runtime.nib</key>
+		<data>
+		BkJzEyL4dpeNmDmgpdlv4xyzsic=
+		</data>
+		<key>DocumentCapture.storyboardc/DocumentUploadViewController.nib/objects-14.0+.nib</key>
+		<data>
+		vZNftXl21anhYXBneprzN8Do9Ag=
+		</data>
+		<key>DocumentCapture.storyboardc/DocumentUploadViewController.nib/runtime.nib</key>
+		<data>
+		vZNftXl21anhYXBneprzN8Do9Ag=
+		</data>
+		<key>DocumentCapture.storyboardc/Info.plist</key>
+		<data>
+		dBN0ssrE7CC4eUhtTUBSv0rLpdw=
+		</data>
+		<key>DocumentCapture.storyboardc/Nz6-Xg-y6r-view-18I-ZM-9wZ.nib/objects-14.0+.nib</key>
+		<data>
+		oDFF9HZuS+VhcfW7yTlHOJ2dbnU=
+		</data>
+		<key>DocumentCapture.storyboardc/Nz6-Xg-y6r-view-18I-ZM-9wZ.nib/runtime.nib</key>
+		<data>
+		lgR0KoXdOw0CwguvSf97R6t9/T4=
+		</data>
+		<key>DocumentCapture.storyboardc/RetryViewController.nib/objects-14.0+.nib</key>
+		<data>
+		9ln7NHgqo7YRBfhrfDswPHekTI4=
+		</data>
+		<key>DocumentCapture.storyboardc/RetryViewController.nib/runtime.nib</key>
+		<data>
+		9ln7NHgqo7YRBfhrfDswPHekTI4=
+		</data>
+		<key>DocumentCapture.storyboardc/bv3-fe-or7-view-dWP-aa-uph.nib/objects-14.0+.nib</key>
+		<data>
+		e6mxCpZw1pRMaBS+aAljd7nCj0U=
+		</data>
+		<key>DocumentCapture.storyboardc/bv3-fe-or7-view-dWP-aa-uph.nib/runtime.nib</key>
+		<data>
+		Oz30wO2dk8Vlb+7ByLD0xHjADiY=
+		</data>
+		<key>DocumentCapture.storyboardc/uZ1-C4-XDq-view-stv-OC-CZ5.nib/objects-14.0+.nib</key>
+		<data>
+		E1cF6aWf1l5TJJIwf0/IPjHgowU=
+		</data>
+		<key>DocumentCapture.storyboardc/uZ1-C4-XDq-view-stv-OC-CZ5.nib/runtime.nib</key>
+		<data>
+		E1cF6aWf1l5TJJIwf0/IPjHgowU=
+		</data>
+		<key>DocumentCapture.storyboardc/vOZ-qx-4e5-view-VEb-Bo-e7P.nib/objects-14.0+.nib</key>
+		<data>
+		PkjrqCbtMdgUhwy4jv4xQuoNb/A=
+		</data>
+		<key>DocumentCapture.storyboardc/vOZ-qx-4e5-view-VEb-Bo-e7P.nib/runtime.nib</key>
+		<data>
+		PkjrqCbtMdgUhwy4jv4xQuoNb/A=
+		</data>
+		<key>FocusTrainingModel_UNIQUE_KEY_ID_4183_20220825033033.tflite</key>
+		<data>
+		Y9+FQUOLZm2Z50H4aApL7Ga1XNc=
 		</data>
 		<key>GoogleMVFaceDetectorResources.bundle/BCLjoy_200.emd</key>
 		<data>
@@ -22,7 +114,7 @@
 		</data>
 		<key>GoogleMVFaceDetectorResources.bundle/Info.plist</key>
 		<data>
-		Q8pxIOtejxPFw127NYi9lXxEr4Q=
+		RNxWpJrUGLySOdwOlDwbRH+Rkb4=
 		</data>
 		<key>GoogleMVFaceDetectorResources.bundle/LMprec_600.emd</key>
 		<data>
@@ -66,7 +158,7 @@
 		</data>
 		<key>Headers/IDentityMediumSDK-Swift.h</key>
 		<data>
-		9lbb5p1gI36Bq+GLr97JbmRvTvo=
+		S3iPDeaWpgkf9HwY33YVNf5qkyw=
 		</data>
 		<key>Headers/IDentityMediumSDK.h</key>
 		<data>
@@ -188,17 +280,17 @@
 		<data>
 		a6wCLJRBu9IYZLRuas5RwAaZYfo=
 		</data>
-		<key>IdTrainingModel_UNIQUE_KEY_ID_3033_20220530113226.tflite</key>
+		<key>IdTrainingModel_UNIQUE_KEY_ID_4183_20220825033033.tflite</key>
 		<data>
-		k4oDB8zgRFUqYW9G/CfNs1aGsqY=
+		izQM45fK2LpgMejN9PZSxqy6Eh0=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		1SJ+pvmLT+xAsSJdUZxpF1trHv0=
+		D7IEDJJuAJpdcAih6AhG2g8NSD8=
 		</data>
 		<key>LatinOCRResources.bundle/Info.plist</key>
 		<data>
-		bntagvjXMtYBlfOd+8rbK3+bBx8=
+		YzDwd+nZzmuN+2S9dyh0mIeH5Es=
 		</data>
 		<key>LatinOCRResources.bundle/region_proposal_text_detector_tflite_gray_quantized.bincfg</key>
 		<data>
@@ -234,36 +326,201 @@
 		</data>
 		<key>Modules/IDentityMediumSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		osXZcGduYlcZToj1C363yCEqHuM=
+		eqbxLQf2C4j8fDTXJLx/0HFe8zw=
 		</data>
 		<key>Modules/IDentityMediumSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		F/zfZyKdmPHZXKNjB4N0Q9C3fEM=
+		qZYX1WCetcK4R8EXAsAq+gLdf28=
 		</data>
 		<key>Modules/IDentityMediumSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		gAmWI5b+rAdv06z4kDHAyL/MrY0=
+		BrJ4wfYCb+fCDpFiT9FMM8x8W/k=
 		</data>
 		<key>Modules/IDentityMediumSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		hbeeMYoHXXb+LXD2dq7cc19YjZc=
+		DnF6EroGVR5Mpg8c1cpdxAuyR9s=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		UB2EYgNXkQ7DC3f0D+DuUF5hJ7U=
 		</data>
-		<key>PassiveFaceTrainingModel_UNIQUE_KEY_ID_3033_20220530113226.tflite</key>
+		<key>PassiveFaceTrainingModel_UNIQUE_KEY_ID_4183_20220825033033.tflite</key>
 		<data>
-		WjRIOjvoOy0HcM4/LGvSQvypemY=
+		FsqtTRHPxNmcev4LvwEF84NFXW4=
+		</data>
+		<key>model.tflite</key>
+		<data>
+		2pDL2v+7SjDGf1H7em1zm/fpfSo=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>DocDetectionTrainingModel_UNIQUE_KEY_ID_3033_20220530113226.tflite</key>
+		<key>Assets.car</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			F9wJUV7xRaEqXIflzNNExd85TPZ1x68ky7qlC5o9d+c=
+			wbCNT12ubkG6J4JKf+BoIPimILOG98iaBXdX+L5mmG0=
+			</data>
+		</dict>
+		<key>DocDetectionTrainingModel_UNIQUE_KEY_ID_4183_20220825033033.tflite</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BuDqJerTwkSSCCw5M4D5D4msR+oSq2OSzjeC0+PD76A=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/1Pk-oV-bqy-view-n8U-9k-eXr.nib/objects-14.0+.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9xhP23qlCv1X3Qqm8krmMby+74oEQnTtJwyw3VACpaI=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/1Pk-oV-bqy-view-n8U-9k-eXr.nib/runtime.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9xhP23qlCv1X3Qqm8krmMby+74oEQnTtJwyw3VACpaI=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/DocumentCaptureInstructionsViewController.nib/objects-14.0+.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			JLtKQ9SlKQAak16G/xqGeaI9K48qNe6m+dQa2p+HjC8=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/DocumentCaptureInstructionsViewController.nib/runtime.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			JLtKQ9SlKQAak16G/xqGeaI9K48qNe6m+dQa2p+HjC8=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/DocumentCapturePreviewViewController.nib/objects-14.0+.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			gQ9K7m9GmJzGgCDVHjX0Su4doRKsP+3RuqNEUQcPzjo=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/DocumentCapturePreviewViewController.nib/runtime.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			gQ9K7m9GmJzGgCDVHjX0Su4doRKsP+3RuqNEUQcPzjo=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/DocumentCaptureViewController.nib/objects-14.0+.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			CJ02hjSHmvn3CpqhnmWAGKojAh8DnExFHobB4MDu5Hk=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/DocumentCaptureViewController.nib/runtime.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			CJ02hjSHmvn3CpqhnmWAGKojAh8DnExFHobB4MDu5Hk=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/DocumentUploadViewController.nib/objects-14.0+.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xgaKo1CpaSUV0u17eT2ZnTpW55tE3nQUyeD/FSA+e8k=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/DocumentUploadViewController.nib/runtime.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xgaKo1CpaSUV0u17eT2ZnTpW55tE3nQUyeD/FSA+e8k=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			hKQn4AEQxs/w2ShyXpGKZGip7jD9enFxaCFuRiMZ/zc=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/Nz6-Xg-y6r-view-18I-ZM-9wZ.nib/objects-14.0+.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9RXVyXX8cq9rcwGPPUh+sDINgiIbJH2CDkkNIC5gH7E=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/Nz6-Xg-y6r-view-18I-ZM-9wZ.nib/runtime.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			mtjcJBXynUnZvEWL60EcSbGqpJmcFOQDmcyXsSOFoQ8=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/RetryViewController.nib/objects-14.0+.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			S8UAuW9CElg+Fgvh5dGsjtYeJy9rNnCMu/L0wlIkRqo=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/RetryViewController.nib/runtime.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			S8UAuW9CElg+Fgvh5dGsjtYeJy9rNnCMu/L0wlIkRqo=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/bv3-fe-or7-view-dWP-aa-uph.nib/objects-14.0+.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			fuG/3nHYJAeafCO5KPhW7VZdRengAk29OPNuHoBaJf0=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/bv3-fe-or7-view-dWP-aa-uph.nib/runtime.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			2qabuTKM7MTYf6+i2iilkX6nmt9QsjtnUhg0G3qlkw8=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/uZ1-C4-XDq-view-stv-OC-CZ5.nib/objects-14.0+.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SO/tWoYWe6cGMsznmchnLJREkReGcrKvz4RNIOdXaGE=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/uZ1-C4-XDq-view-stv-OC-CZ5.nib/runtime.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SO/tWoYWe6cGMsznmchnLJREkReGcrKvz4RNIOdXaGE=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/vOZ-qx-4e5-view-VEb-Bo-e7P.nib/objects-14.0+.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SUH1qjKIzgPJ1nQuin0aJSatg+RHeiZv1GiCWlEzptc=
+			</data>
+		</dict>
+		<key>DocumentCapture.storyboardc/vOZ-qx-4e5-view-VEb-Bo-e7P.nib/runtime.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SUH1qjKIzgPJ1nQuin0aJSatg+RHeiZv1GiCWlEzptc=
+			</data>
+		</dict>
+		<key>FocusTrainingModel_UNIQUE_KEY_ID_4183_20220825033033.tflite</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Z0+LU43Yf149uDIlz5MjLvQrDVPlvhjdyWC0O2szJCk=
 			</data>
 		</dict>
 		<key>GoogleMVFaceDetectorResources.bundle/BCLjoy_200.emd</key>
@@ -291,7 +548,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			e1p+dqhBVGWl/fEC+Rv5clJZn02AlzVqU3TlMFOBWQc=
+			V5bd9nSEg1vETpMIPXFA17PLFzUJZBl5faGR/VjiVU4=
 			</data>
 		</dict>
 		<key>GoogleMVFaceDetectorResources.bundle/LMprec_600.emd</key>
@@ -368,7 +625,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xukGfBZCDER7nb/kqX268iXLezuedBqkoEtNNUAirjU=
+			hHUrNMbNONR4LAAN+Qg8DL3I/OUzCiFJpGsdjzDCRTA=
 			</data>
 		</dict>
 		<key>Headers/IDentityMediumSDK.h</key>
@@ -581,18 +838,18 @@
 			XmZGbwTDpYoTP601wcCiR4ViTPFC2JzZHO0C+YLBLiI=
 			</data>
 		</dict>
-		<key>IdTrainingModel_UNIQUE_KEY_ID_3033_20220530113226.tflite</key>
+		<key>IdTrainingModel_UNIQUE_KEY_ID_4183_20220825033033.tflite</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nKeBTp8WGiZ3+KJpSBwQgxFX6seUsT+sPQ6XtqTgGgs=
+			ljsLcNk9/6Dw2OHth401cThWPApxV2PMnZrzcXh20ZQ=
 			</data>
 		</dict>
 		<key>LatinOCRResources.bundle/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Zzu6Ysuu/IfWPhrfJEzDbmRNH0yhWWZQ1EzZk9JVea8=
+			DEKEegv4Df9KtWYg+ijgAq8qwRXbdiLf1FJJvzNxcHU=
 			</data>
 		</dict>
 		<key>LatinOCRResources.bundle/region_proposal_text_detector_tflite_gray_quantized.bincfg</key>
@@ -655,28 +912,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mvmgab+D5zC9wL+MIuYDwoIfJPnwTGEMBXz0FYu0j7E=
+			bhdRRdghK0JAza8UAjhOfZexNUevuc5rtlolnkoS5Hk=
 			</data>
 		</dict>
 		<key>Modules/IDentityMediumSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4QbSuazmE+fyyiDWmQKRT8aPRpqIH+Y4/ddkriz5ySU=
+			h9WRo+PsI1nJgNPx+RN4O4ZTmW0oRbNXkSEXyWAqK+4=
 			</data>
 		</dict>
 		<key>Modules/IDentityMediumSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0/W+CU9abOXjcWabRohqQzCi5/9Xa8fGjFoEJoNuiv0=
+			l/z+1dLVxAIjtT7N40OAd6t51TliWzil2CeQFd+4Msw=
 			</data>
 		</dict>
 		<key>Modules/IDentityMediumSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			XMb6DQL+9V6INv6DXINeJZAsPVDzVWl3t/ptI4Xl1O8=
+			PZfAP+swYQzeI44jZWugrqIvwgKU8VeokksdaqOUE8A=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -686,11 +943,18 @@
 			RwqW8JWKb85I751ubsyL3Wpseh3v6N+3YVBOuPBZbjI=
 			</data>
 		</dict>
-		<key>PassiveFaceTrainingModel_UNIQUE_KEY_ID_3033_20220530113226.tflite</key>
+		<key>PassiveFaceTrainingModel_UNIQUE_KEY_ID_4183_20220825033033.tflite</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			pI7F3aJ6xcEyXZefggu70LnUnB0mPuDoRfBlNvCkI/I=
+			UvZz9F302hkeJC6DhO29zGlhyFq/kmDMcYmZPWNvoWw=
+			</data>
+		</dict>
+		<key>model.tflite</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ZjJgZMph941OhgVR6ZZ8UQ+13joP3v6BFZbpPbj2VJg=
 			</data>
 		</dict>
 	</dict>

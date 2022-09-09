@@ -1,8 +1,9 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
 // swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name IDentityMediumSDK
 import AVFoundation
 import Accelerate
+import AudioToolbox
 import CoreGraphics
 import CoreMedia
 import Foundation
@@ -22,6 +23,17 @@ public struct CustomerVerifyDataResponse : Swift.Codable {
   public var extractedPersonalData: IDentityMediumSDK.PersonalCustomerVerifyResponseData?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
+}
+extension IDentityMediumSDK.DocumentCapture {
+  public struct Fonts {
+    public var instructionScreenLabelFont: UIKit.UIFont?
+    public var instructionScreenButtonFont: UIKit.UIFont?
+    public var closeButtonTextFont: UIKit.UIFont?
+    public var labelFont: UIKit.UIFont?
+    public var captureLabelFont: UIKit.UIFont?
+    public var retryScreenLabelFont: UIKit.UIFont?
+    public var retryScreenButtonFont: UIKit.UIFont?
+  }
 }
 public struct FormDetailValidateIdResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
@@ -68,6 +80,21 @@ public struct AdditionalCustomerEnrollBiometricRequestData : Swift.Encodable {
   public var ocrMetadata: IDentityMediumSDK.OcrMetadata?
   public init(uniqueRequestId: Swift.String = UUID().uuidString, needImmediateResponse: IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData.NeedImmediateResponse? = nil, deDuplicationRequired: IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData.DeDuplicationRequired? = nil)
   public func encode(to encoder: Swift.Encoder) throws
+}
+extension IDentityMediumSDK.DocumentCapture {
+  public enum LabelPosition {
+    case top
+    case center
+    case bottom
+    public static func == (a: IDentityMediumSDK.DocumentCapture.LabelPosition, b: IDentityMediumSDK.DocumentCapture.LabelPosition) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public struct Layout {
+    public var labelPosition: IDentityMediumSDK.DocumentCapture.LabelPosition
+  }
 }
 extension Swift.Dictionary {
   public static func += (lhs: inout Swift.Dictionary<Key, Value>, rhs: Swift.Dictionary<Key, Value>)
@@ -207,11 +234,55 @@ public struct AdditionalCustomerWFlagCommonData : Swift.Encodable {
   public init(uniqueRequestId: Swift.String = UUID().uuidString, manualReviewRequired: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.ManualReviewRequired? = .no, bypassAgeValidation: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.BypassAgeValidation? = .no, deDuplicationRequired: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.DeDuplicationRequired? = .no, bypassNameMatching: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.BypassNameMatching? = .yes, postDataAPIRequired: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.PostDataAPIRequired? = .no, sendInputImagesInPost: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.SendInputImagesInPost? = .no, sendProcessedImagesInPost: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.SendProcessedImagesInPost? = .no, needImmediateResponse: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.NeedImmediateResponse? = .no, deduplicationSynchronous: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.DeduplicationSynchronous? = .no, verifyDataWithHost: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.VerifyDataWithHost? = .no, idBackImageRequired: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.IdBackImageRequired? = .yes, stripSpecialCharacters: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.StripSpecialCharacters? = .yes)
   public func encode(to encoder: Swift.Encoder) throws
 }
+public protocol DocumentCaptureDelegate : AnyObject {
+  func updated(state: IDentityMediumSDK.DocumentCaptureState)
+}
+public enum DocumentCaptureState {
+  case detectingBox
+  case moveCloser
+  case moveAway
+  case alignRectangle
+  case success(IDentityMediumSDK.AdditionalDocumentsRequest)
+  case failed
+}
+public struct DocumentDebugData {
+  public var documentLocation: CoreGraphics.CGRect
+  public var fullSize: CoreGraphics.CGSize?
+}
+public class DocumentCapture {
+  public static var options: IDentityMediumSDK.DocumentCapture.Options
+  public static var strings: IDentityMediumSDK.DocumentCapture.Strings
+  public static var colors: IDentityMediumSDK.DocumentCapture.Colors
+  public static var fonts: IDentityMediumSDK.DocumentCapture.Fonts
+  public static var images: IDentityMediumSDK.DocumentCapture.Images
+  public static var layout: IDentityMediumSDK.DocumentCapture.Layout
+  weak public var delegate: IDentityMediumSDK.DocumentCaptureDelegate?
+  public init(overlayFrame: CoreGraphics.CGRect)
+  public func retry()
+  @objc deinit
+}
+extension IDentityMediumSDK.DocumentCapture : IDentityMediumSDK.CaptureSessionDelegate {
+  public func captured(image: UIKit.UIImage, captureMode: IDentityMediumSDK.CaptureMode, lensPosition: Swift.Float)
+}
+extension Foundation.NSNotification.Name {
+  public static let documentCaptureDebugData: Foundation.Notification.Name
+  public static let documentCaptureMode: Foundation.Notification.Name
+}
+extension IDentityMediumSDK.DocumentCapture {
+  public struct Images {
+    public var instructionScreenImage: UIKit.UIImage?
+    public var closeButtonImage: UIKit.UIImage?
+    public var silhouetteImage: UIKit.UIImage?
+    public var bottomInfoImage: UIKit.UIImage?
+    public var retryScreenImage: UIKit.UIImage?
+  }
+}
 public struct CustomerValidateIdFaceMatchDataRequest : Swift.Encodable {
   public var idData: IDentityMediumSDK.IdDataRequest
   public var personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData1?
+  public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public var biometericData: IDentityMediumSDK.BiometricValidateIdFaceMatchData
-  public init(idData: IDentityMediumSDK.IdDataRequest, personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData1? = nil, biometericData: IDentityMediumSDK.BiometricValidateIdFaceMatchData)
+  public init(idData: IDentityMediumSDK.IdDataRequest, personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData1? = nil, additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, biometericData: IDentityMediumSDK.BiometricValidateIdFaceMatchData)
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct PersonalCustomerCommonRequestData : Swift.Encodable {
@@ -243,7 +314,8 @@ public struct PersonalCustomerCommonRequestData : Swift.Encodable {
 public struct CustomerValidateIdDataRequest : Swift.Encodable {
   public var idData: IDentityMediumSDK.IdDataRequest
   public var personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData1?
-  public init(idData: IDentityMediumSDK.IdDataRequest, personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData1? = nil)
+  public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
+  public init(idData: IDentityMediumSDK.IdDataRequest, personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData1? = nil, additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil)
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct BiometricEnrollBiometricRequestData : Swift.Encodable {
@@ -275,7 +347,8 @@ public struct Metadata : Swift.Encodable {
     public var captureTime: Swift.Int
     public var avg_score: Swift.Float?
     public var detectedRect: IDentityMediumSDK.Metadata.DetectedRect
-    public init(operationTime: Swift.Int, captureTime: Swift.Int, avgRealness: Swift.Float?, detectedRect: IDentityMediumSDK.Metadata.DetectedRect)
+    public var confidence: Swift.Float
+    public init(operationTime: Swift.Int, captureTime: Swift.Int, avgRealness: Swift.Float?, detectedRect: IDentityMediumSDK.Metadata.DetectedRect, confidence: Swift.Float)
     public func encode(to encoder: Swift.Encoder) throws
   }
   public struct Back : Swift.Encodable {
@@ -283,7 +356,8 @@ public struct Metadata : Swift.Encodable {
     public var captureTime: Swift.Int
     public var avg_score: Swift.Float?
     public var detectedRect: IDentityMediumSDK.Metadata.DetectedRect
-    public init(operationTime: Swift.Int, captureTime: Swift.Int, avgRealness: Swift.Float?, detectedRect: IDentityMediumSDK.Metadata.DetectedRect)
+    public var confidence: Swift.Float
+    public init(operationTime: Swift.Int, captureTime: Swift.Int, avgRealness: Swift.Float?, detectedRect: IDentityMediumSDK.Metadata.DetectedRect, confidence: Swift.Float)
     public func encode(to encoder: Swift.Encoder) throws
   }
   public struct Selfie : Swift.Encodable {
@@ -315,6 +389,7 @@ public enum IDCaptureState {
   case moveCloser
   case moveAway
   case alignRectangle
+  case notInFocus
   case detectedBox(IDentityMediumSDK.DetectedData)
   case classifiedDocument(IDentityMediumSDK.DetectedData)
   case success(IDentityMediumSDK.DetectedData)
@@ -322,12 +397,17 @@ public enum IDCaptureState {
   case failed(IDentityMediumSDK.DetectedData)
   case autofill(IDentityMediumSDK.AutofillResult?)
 }
+public struct FocusScores {
+  public var blur: Swift.Float
+  public var sharp: Swift.Float
+}
 public struct DebugData {
   public var documentLocation: CoreGraphics.CGRect
   public var fullSize: CoreGraphics.CGSize?
   public var faceLocation: CoreGraphics.CGRect?
   public var realnessScores: IDentityMediumSDK.RealnessScores?
   public var topClassifierResults: [(Swift.String, Swift.Float)]?
+  public var focusScores: IDentityMediumSDK.FocusScores?
 }
 public struct DetectedData {
   public enum DocumentSide {
@@ -340,6 +420,7 @@ public struct DetectedData {
     }
   }
   public var documentLocation: CoreGraphics.CGRect
+  public var documentConfidence: Swift.Float
   public var faceLocation: CoreGraphics.CGRect?
   public var fullImageSize: CoreGraphics.CGSize
   public var type: Swift.String?
@@ -397,6 +478,9 @@ extension Foundation.NSNotification.Name {
 }
 extension IDentityMediumSDK.SelfieCapture {
   public struct Strings {
+    public var instructionScreenText: Swift.String
+    public var instructionScreenButtonText: Swift.String
+    public var closeButtonText: Swift.String?
     public var moveCloser: Swift.String
     public var moveAway: Swift.String
     public var alignOval: Swift.String
@@ -424,6 +508,20 @@ public struct AdditionalCustomerCommonData : Swift.Encodable {
   public init(uniqueRequestId: Swift.String)
   public func encode(to encoder: Swift.Encoder) throws
 }
+extension IDentityMediumSDK.DocumentCapture {
+  public struct Strings {
+    public var instructionScreenText: Swift.String
+    public var instructionScreenButtonText: Swift.String
+    public var closeButtonText: Swift.String?
+    public var moveCloser: Swift.String
+    public var moveAway: Swift.String
+    public var alignRectangle: Swift.String
+    public var captureDocument: Swift.String
+    public var retryScreenText: Swift.String
+    public var retryButtonText: Swift.String
+    public var cancelButtonText: Swift.String
+  }
+}
 public struct CustomerIdentifyDataResponse : Swift.Codable {
   public var extractedPersonalData: IDentityMediumSDK.PersonalCustomerIdentifyResponseData?
   public func encode(to encoder: Swift.Encoder) throws
@@ -439,8 +537,9 @@ public struct FormDetailVerifyResponseData : Swift.Codable {
 }
 public struct CustomerVerifyDataRequest : Swift.Encodable {
   public var personalData: IDentityMediumSDK.PersonalCustomerVerifyData
+  public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public var biometericData: IDentityMediumSDK.BiometricVerifyRequestData
-  public init(personalData: IDentityMediumSDK.PersonalCustomerVerifyData, biometricData: IDentityMediumSDK.BiometricVerifyRequestData)
+  public init(personalData: IDentityMediumSDK.PersonalCustomerVerifyData, additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, biometricData: IDentityMediumSDK.BiometricVerifyRequestData)
   public func encode(to encoder: Swift.Encoder) throws
 }
 public enum CameraPosition {
@@ -587,8 +686,9 @@ public struct FingerPrint : Swift.Encodable {
 }
 public struct CustomerEnrollBiometricDataRequest : Swift.Encodable {
   public var personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData
+  public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public var biometericData: IDentityMediumSDK.BiometricEnrollBiometricRequestData
-  public init(personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData, biometricData: IDentityMediumSDK.BiometricEnrollBiometricRequestData)
+  public init(personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData, additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, biometricData: IDentityMediumSDK.BiometricEnrollBiometricRequestData)
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct BiometricLiveCheckData : Swift.Encodable {
@@ -631,6 +731,9 @@ extension IDentityMediumSDK.CaptureSession {
 }
 extension IDentityMediumSDK.SelfieCapture {
   public struct Fonts {
+    public var instructionScreenLabelFont: UIKit.UIFont?
+    public var instructionScreenButtonFont: UIKit.UIFont?
+    public var closeButtonTextFont: UIKit.UIFont?
     public var labelFont: UIKit.UIFont?
     public var retryScreenLabelFont: UIKit.UIFont?
     public var retryScreenButtonFont: UIKit.UIFont?
@@ -828,9 +931,15 @@ public struct EmployeeData : Swift.Encodable {
 public struct CustomerEnrollDataRequest : Swift.Encodable {
   public var idData: IDentityMediumSDK.IdDataRequest
   public var personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData
+  public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public var biometericData: IDentityMediumSDK.BiometricEnrollData
-  public init(idData: IDentityMediumSDK.IdDataRequest, personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData, biometricData: IDentityMediumSDK.BiometricEnrollData)
+  public init(idData: IDentityMediumSDK.IdDataRequest, personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData, additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, biometricData: IDentityMediumSDK.BiometricEnrollData)
   public func encode(to encoder: Swift.Encoder) throws
+}
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public class var storyboardIdentifier: Swift.String {
+    get
+  }
 }
 public struct QKMRZResult {
   public let documentType: Swift.String
@@ -873,6 +982,15 @@ public struct CustomerValidateIdResponse : Swift.Codable {
 }
 extension IDentityMediumSDK.SelfieCapture {
   public struct Colors {
+    public var instructionScreenBackgroundColor: UIKit.UIColor?
+    public var instructionScreenImageTintColor: UIKit.UIColor?
+    public var instructionScreenLabelTextColor: UIKit.UIColor?
+    public var instructionScreenButtonTextColor: UIKit.UIColor?
+    public var instructionScreenButtonBackgroundColor: UIKit.UIColor?
+    public var overlayTopViewColor: UIKit.UIColor?
+    public var closeButtonColor: UIKit.UIColor?
+    public var closeButtonTextColor: UIKit.UIColor?
+    public var closeButtonImageTintColor: UIKit.UIColor?
     public var backgroundColor: UIKit.UIColor?
     public var successLabelTextColor: UIKit.UIColor?
     public var errorLabelTextColor: UIKit.UIColor?
@@ -1011,9 +1129,35 @@ public struct IdDataRequest : Swift.Encodable {
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct CustomerLiveCheckDataRequest : Swift.Encodable {
+  public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public var biometericData: IDentityMediumSDK.BiometricLiveCheckData
-  public init(biometericData: IDentityMediumSDK.BiometricLiveCheckData)
+  public init(additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, biometericData: IDentityMediumSDK.BiometricLiveCheckData)
   public func encode(to encoder: Swift.Encoder) throws
+}
+extension IDentityMediumSDK.DocumentCapture {
+  public struct Colors {
+    public var instructionScreenBackgroundColor: UIKit.UIColor?
+    public var instructionScreenImageTintColor: UIKit.UIColor?
+    public var instructionScreenLabelTextColor: UIKit.UIColor?
+    public var instructionScreenButtonTextColor: UIKit.UIColor?
+    public var instructionScreenButtonBackgroundColor: UIKit.UIColor?
+    public var overlayTopViewColor: UIKit.UIColor?
+    public var closeButtonColor: UIKit.UIColor?
+    public var closeButtonTextColor: UIKit.UIColor?
+    public var closeButtonImageTintColor: UIKit.UIColor?
+    public var backgroundColor: UIKit.UIColor?
+    public var captureLabelColor: UIKit.UIColor?
+    public var captureLabelTextColor: UIKit.UIColor?
+    public var successLabelTextColor: UIKit.UIColor?
+    public var errorLabelTextColor: UIKit.UIColor?
+    public var successLabelBackgroundColor: UIKit.UIColor?
+    public var errorLabelBackgroundColor: UIKit.UIColor?
+    public var retryScreenBackgroundColor: UIKit.UIColor?
+    public var retryScreenLabelTextColor: UIKit.UIColor?
+    public var retryScreenImageTintColor: UIKit.UIColor?
+    public var retryScreenButtonTextColor: UIKit.UIColor?
+    public var retryScreenButtonBackgroundColor: UIKit.UIColor?
+  }
 }
 public struct RealnessScores {
   public let photocopyScore: Swift.Float
@@ -1091,7 +1235,18 @@ public struct FingerPrintMetadata : Swift.Encodable {
 }
 extension IDentityMediumSDK.IDCapture {
   public struct Colors {
+    public var instructionScreenBackgroundColor: UIKit.UIColor?
+    public var instructionScreenImageTintColor: UIKit.UIColor?
+    public var instructionScreenLabelTextColor: UIKit.UIColor?
+    public var instructionScreenButtonTextColor: UIKit.UIColor?
+    public var instructionScreenButtonBackgroundColor: UIKit.UIColor?
+    public var overlayTopViewColor: UIKit.UIColor?
+    public var closeButtonColor: UIKit.UIColor?
+    public var closeButtonTextColor: UIKit.UIColor?
+    public var closeButtonImageTintColor: UIKit.UIColor?
     public var backgroundColor: UIKit.UIColor?
+    public var captureLabelColor: UIKit.UIColor?
+    public var captureLabelTextColor: UIKit.UIColor?
     public var successLabelTextColor: UIKit.UIColor?
     public var errorLabelTextColor: UIKit.UIColor?
     public var successLabelBackgroundColor: UIKit.UIColor?
@@ -1166,9 +1321,13 @@ public struct CustomerValidateIdFaceMatchResponse : Swift.Codable {
 }
 extension IDentityMediumSDK.IDCapture {
   public struct Strings {
+    public var instructionScreenText: Swift.String
+    public var instructionScreenButtonText: Swift.String
+    public var closeButtonText: Swift.String?
     public var moveCloser: Swift.String
     public var moveAway: Swift.String
     public var alignRectangle: Swift.String
+    public var notInFocus: Swift.String
     public var useFront: Swift.String
     public var makeSurePhotoTextVisible: Swift.String
     public var scanBarcode: Swift.String
@@ -1181,6 +1340,18 @@ extension IDentityMediumSDK.IDCapture {
     public var retryScreenText: Swift.String
     public var retryButtonText: Swift.String
     public var cancelButtonText: Swift.String
+  }
+}
+extension IDentityMediumSDK.DocumentCapture {
+  public struct Options {
+    public var lowerWidthThresholdTolerance: Swift.Float
+    public var upperWidthThresholdTolerance: Swift.Float
+    public var isDebugMode: Swift.Bool
+    public var capture4K: Swift.Bool
+    public var enableInstructionScreen: Swift.Bool
+    public var documentCaptureFrameWidth: Swift.Float?
+    public var documentCaptureFrameHeight: Swift.Float?
+    public var documentFileSizeLimit: Swift.Float
   }
 }
 public struct State : Swift.Codable {
@@ -1225,6 +1396,12 @@ public struct AdditionalCustomerLiveCheckData : Swift.Encodable {
   public var metadata: IDentityMediumSDK.Metadata?
   public var ocrMetadata: IDentityMediumSDK.OcrMetadata?
   public init(uniqueRequestId: Swift.String)
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct AdditionalDocumentsRequest : Swift.Encodable {
+  public var documentName: Swift.String
+  public var additionalDocument: Swift.String
+  public init(documentName: Swift.String, additionalDocument: Swift.String)
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct PersonalCustomerCommonRequestData1 : Swift.Encodable {
@@ -1272,6 +1449,10 @@ public class QKMRZParser {
   public func parse(mrzString: Swift.String) -> IDentityMediumSDK.QKMRZResult?
   @objc deinit
 }
+public typealias DocumentCaptureCompletion = (_ result: Swift.Result<IDentityMediumSDK.AdditionalDocumentsRequest, Swift.Error>) -> Swift.Void
+extension IDentityMediumSDK.IDentitySDK {
+  public class func documentCapture(from presenter: UIKit.UIViewController, documentName name: Swift.String, uploadDocument: Swift.Bool = false, completion: @escaping IDentityMediumSDK.DocumentCaptureCompletion)
+}
 extension QuartzCore.CALayer {
   public func draw(rect: CoreGraphics.CGRect, color: UIKit.UIColor)
   public func removeShapeSublayers()
@@ -1283,8 +1464,12 @@ public struct BiometricValidateIdFaceMatchData : Swift.Encodable {
 }
 extension IDentityMediumSDK.IDCapture {
   public struct Images {
+    public var instructionScreenImage: UIKit.UIImage?
+    public var closeButtonImage: UIKit.UIImage?
+    public var silhouetteImage: UIKit.UIImage?
     public var frontSilhouetteImage: UIKit.UIImage?
     public var backSilhouetteImage: UIKit.UIImage?
+    public var bottomInfoImage: UIKit.UIImage?
     public var retryScreenImage: UIKit.UIImage?
   }
 }
@@ -1329,12 +1514,18 @@ public struct IdDataResponse : Swift.Codable {
 }
 extension IDentityMediumSDK.SelfieCapture {
   public struct Images {
+    public var instructionScreenImage: UIKit.UIImage?
+    public var closeButtonImage: UIKit.UIImage?
     public var silhouetteImage: UIKit.UIImage?
+    public var bottomInfoImage: UIKit.UIImage?
     public var retryScreenImage: UIKit.UIImage?
   }
 }
 extension IDentityMediumSDK.IDCapture {
   public struct Fonts {
+    public var instructionScreenLabelFont: UIKit.UIFont?
+    public var instructionScreenButtonFont: UIKit.UIFont?
+    public var closeButtonTextFont: UIKit.UIFont?
     public var labelFont: UIKit.UIFont?
     public var captureLabelFont: UIKit.UIFont?
     public var retryScreenLabelFont: UIKit.UIFont?
@@ -1430,6 +1621,8 @@ extension IDentityMediumSDK.IDCapture {
     public var backDocumentConfidence: Swift.Float
     public var lowerWidthThresholdTolerance: Swift.Float
     public var upperWidthThresholdTolerance: Swift.Float
+    public var documentComponentConfidence: Swift.Float
+    public var focusThreshold: Swift.Float
     public var isDebugMode: Swift.Bool
     public var capture4K: Swift.Bool
     public var uploadIdData: Swift.Bool
@@ -1490,6 +1683,7 @@ public enum InitializationStage : Swift.String {
   case classifierTrainingModelLabel
   case faceMaskTrainingModelLabel
   case docDetectionTrainingModelLabel
+  case focusTrainingModelLabel
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
@@ -1523,12 +1717,16 @@ extension IDentityMediumSDK.IDentitySDK {
   public static var docDetectionModelName: Swift.String {
     get
   }
+  public static var focusModelName: Swift.String {
+    get
+  }
   public static var modelVersions: [Swift.String : Swift.String] {
     get
   }
   public static var version: Swift.String {
     get
   }
+  public static var pluginName: Swift.String
 }
 public struct CustomerEnrollBiometricResponse : Swift.Codable {
   public var status: IDentityMediumSDK.StatusData?
@@ -1543,6 +1741,8 @@ extension IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData.NeedImm
 extension IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData.DeDuplicationRequired : Swift.Equatable {}
 extension IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData.DeDuplicationRequired : Swift.Hashable {}
 extension IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData.DeDuplicationRequired : Swift.RawRepresentable {}
+extension IDentityMediumSDK.DocumentCapture.LabelPosition : Swift.Equatable {}
+extension IDentityMediumSDK.DocumentCapture.LabelPosition : Swift.Hashable {}
 extension IDentityMediumSDK.AdditionalCustomerWFlagCommonData.ManualReviewRequired : Swift.Equatable {}
 extension IDentityMediumSDK.AdditionalCustomerWFlagCommonData.ManualReviewRequired : Swift.Hashable {}
 extension IDentityMediumSDK.AdditionalCustomerWFlagCommonData.ManualReviewRequired : Swift.RawRepresentable {}

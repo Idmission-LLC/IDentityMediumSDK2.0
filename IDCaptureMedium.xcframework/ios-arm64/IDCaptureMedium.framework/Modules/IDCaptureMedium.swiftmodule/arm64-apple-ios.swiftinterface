@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
 // swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name IDCaptureMedium
 import AudioToolbox
 import CoreGraphics
@@ -11,7 +11,7 @@ import _Concurrency
 public struct ValidateIdResult {
   public var front: IDentityMediumSDK.DetectedData
   public var back: IDentityMediumSDK.DetectedData?
-  public func submit(completion: @escaping IDentityMediumSDK.ValidateIdAPICompletion)
+  public func submit(additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, completion: @escaping IDentityMediumSDK.ValidateIdAPICompletion)
 }
 public typealias ValidateIdCompletion = (_ result: Swift.Result<IDCaptureMedium.ValidateIdResult, Swift.Error>) -> Swift.Void
 public typealias AutofillCompletion = (_ result: Swift.Result<IDentityMediumSDK.AutofillResult, Swift.Error>) -> Swift.Void
