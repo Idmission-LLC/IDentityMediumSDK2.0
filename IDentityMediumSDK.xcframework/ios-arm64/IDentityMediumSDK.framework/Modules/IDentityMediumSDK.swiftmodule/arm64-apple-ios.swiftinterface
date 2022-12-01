@@ -1,11 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-compiler-version: Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)
 // swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name IDentityMediumSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
 import Accelerate
 import AudioToolbox
+import CommonCrypto
 import CoreGraphics
 import CoreMedia
+import CryptoKit
 import Foundation
 import GZIP
 @_exported import IDentityMediumSDK
@@ -19,6 +22,7 @@ import TensorFlowLite
 import UIKit
 import ZXingObjC
 import _Concurrency
+import _StringProcessing
 public struct CustomerVerifyDataResponse : Swift.Codable {
   public var extractedPersonalData: IDentityMediumSDK.PersonalCustomerVerifyResponseData?
   public func encode(to encoder: Swift.Encoder) throws
@@ -38,6 +42,7 @@ extension IDentityMediumSDK.DocumentCapture {
 public struct FormDetailValidateIdResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
   public var verificationResultId: Swift.Int?
+  public var verificationResultDetails: [Swift.String : Any]?
   public var verificationResult: Swift.String?
   public var verificationResultCode: Swift.String?
   public func encode(to encoder: Swift.Encoder) throws
@@ -246,8 +251,8 @@ public enum DocumentCaptureState {
   case failed
 }
 public struct DocumentDebugData {
-  public var documentLocation: CoreGraphics.CGRect
-  public var fullSize: CoreGraphics.CGSize?
+  public var documentLocation: CoreFoundation.CGRect
+  public var fullSize: CoreFoundation.CGSize?
 }
 public class DocumentCapture {
   public static var options: IDentityMediumSDK.DocumentCapture.Options
@@ -257,7 +262,7 @@ public class DocumentCapture {
   public static var images: IDentityMediumSDK.DocumentCapture.Images
   public static var layout: IDentityMediumSDK.DocumentCapture.Layout
   weak public var delegate: IDentityMediumSDK.DocumentCaptureDelegate?
-  public init(overlayFrame: CoreGraphics.CGRect)
+  public init(overlayFrame: CoreFoundation.CGRect)
   public func retry()
   @objc deinit
 }
@@ -339,29 +344,29 @@ public struct Metadata : Swift.Encodable {
     public var top: Swift.Float
     public var left: Swift.Float
     public var bottom: Swift.Float
-    public init(detectedFrame: CoreGraphics.CGRect, fullImageSize: CoreGraphics.CGSize)
+    public init(detectedFrame: CoreFoundation.CGRect, fullImageSize: CoreFoundation.CGSize)
     public func encode(to encoder: Swift.Encoder) throws
   }
   public struct Front : Swift.Encodable {
     public var operationTime: Swift.Int
     public var captureTime: Swift.Int
-    public var avg_score: Swift.Float?
+    public var avg_score: Swift.String?
     public var detectedRect: IDentityMediumSDK.Metadata.DetectedRect
-    public var confidence: Swift.Float
+    public var confidence: Swift.String
     public init(operationTime: Swift.Int, captureTime: Swift.Int, avgRealness: Swift.Float?, detectedRect: IDentityMediumSDK.Metadata.DetectedRect, confidence: Swift.Float)
     public func encode(to encoder: Swift.Encoder) throws
   }
   public struct Back : Swift.Encodable {
     public var operationTime: Swift.Int
     public var captureTime: Swift.Int
-    public var avg_score: Swift.Float?
+    public var avg_score: Swift.String?
     public var detectedRect: IDentityMediumSDK.Metadata.DetectedRect
-    public var confidence: Swift.Float
+    public var confidence: Swift.String
     public init(operationTime: Swift.Int, captureTime: Swift.Int, avgRealness: Swift.Float?, detectedRect: IDentityMediumSDK.Metadata.DetectedRect, confidence: Swift.Float)
     public func encode(to encoder: Swift.Encoder) throws
   }
   public struct Selfie : Swift.Encodable {
-    public var avg_score: Swift.Float
+    public var avg_score: Swift.String
     public var operationTime: Swift.Int
     public var captureTime: Swift.Int
     public var detectedRect: IDentityMediumSDK.Metadata.DetectedRect
@@ -389,7 +394,6 @@ public enum IDCaptureState {
   case moveCloser
   case moveAway
   case alignRectangle
-  case notInFocus
   case detectedBox(IDentityMediumSDK.DetectedData)
   case classifiedDocument(IDentityMediumSDK.DetectedData)
   case success(IDentityMediumSDK.DetectedData)
@@ -397,17 +401,12 @@ public enum IDCaptureState {
   case failed(IDentityMediumSDK.DetectedData)
   case autofill(IDentityMediumSDK.AutofillResult?)
 }
-public struct FocusScores {
-  public var blur: Swift.Float
-  public var sharp: Swift.Float
-}
 public struct DebugData {
-  public var documentLocation: CoreGraphics.CGRect
-  public var fullSize: CoreGraphics.CGSize?
-  public var faceLocation: CoreGraphics.CGRect?
+  public var documentLocation: CoreFoundation.CGRect
+  public var fullSize: CoreFoundation.CGSize?
+  public var faceLocation: CoreFoundation.CGRect?
   public var realnessScores: IDentityMediumSDK.RealnessScores?
   public var topClassifierResults: [(Swift.String, Swift.Float)]?
-  public var focusScores: IDentityMediumSDK.FocusScores?
 }
 public struct DetectedData {
   public enum DocumentSide {
@@ -419,10 +418,10 @@ public struct DetectedData {
       get
     }
   }
-  public var documentLocation: CoreGraphics.CGRect
+  public var documentLocation: CoreFoundation.CGRect
   public var documentConfidence: Swift.Float
-  public var faceLocation: CoreGraphics.CGRect?
-  public var fullImageSize: CoreGraphics.CGSize
+  public var faceLocation: CoreFoundation.CGRect?
+  public var fullImageSize: CoreFoundation.CGSize
   public var type: Swift.String?
   public var sides: Swift.Int
   public var side: IDentityMediumSDK.DetectedData.DocumentSide?
@@ -464,7 +463,7 @@ public class IDCapture {
   public static var images: IDentityMediumSDK.IDCapture.Images
   public static var layout: IDentityMediumSDK.IDCapture.Layout
   weak public var delegate: IDentityMediumSDK.IDCaptureDelegate?
-  public init(overlayFrame: CoreGraphics.CGRect)
+  public init(overlayFrame: CoreFoundation.CGRect)
   public func typeMismatch()
   public func retry()
   @objc deinit
@@ -480,7 +479,9 @@ extension IDentityMediumSDK.SelfieCapture {
   public struct Strings {
     public var instructionScreenText: Swift.String
     public var instructionScreenButtonText: Swift.String
+    public var captureSelfie: Swift.String
     public var closeButtonText: Swift.String?
+    public var multipleFacesDetected: Swift.String
     public var moveCloser: Swift.String
     public var moveAway: Swift.String
     public var alignOval: Swift.String
@@ -499,6 +500,7 @@ extension IDentityMediumSDK.SelfieCapture {
     public var retryScreenText: Swift.String
     public var retryButtonText: Swift.String
     public var cancelButtonText: Swift.String
+    public mutating func reset()
   }
 }
 public struct AdditionalCustomerCommonData : Swift.Encodable {
@@ -517,9 +519,13 @@ extension IDentityMediumSDK.DocumentCapture {
     public var moveAway: Swift.String
     public var alignRectangle: Swift.String
     public var captureDocument: Swift.String
+    public var uploadImage: Swift.String
+    public var uploadPDF: Swift.String
+    public var documentPreview: Swift.String
     public var retryScreenText: Swift.String
     public var retryButtonText: Swift.String
     public var cancelButtonText: Swift.String
+    public mutating func reset()
   }
 }
 public struct CustomerIdentifyDataResponse : Swift.Codable {
@@ -530,6 +536,7 @@ public struct CustomerIdentifyDataResponse : Swift.Codable {
 public struct FormDetailVerifyResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
   public var verificationResultId: Swift.Int?
+  public var verificationResultDetails: [Swift.String : Any]?
   public var verificationResult: Swift.String?
   public var verificationResultCode: Swift.String?
   public func encode(to encoder: Swift.Encoder) throws
@@ -587,6 +594,8 @@ public struct PersonalCustomerVerifyResponseData : Swift.Codable {
   public var addressLine3: Swift.String?
   public var city: Swift.String?
   public var country: Swift.String?
+  public var state: Swift.String?
+  public var postalCode: Swift.String?
   public var phone: Swift.String?
   public var district: Swift.String?
   public var enrolledDate: Swift.String?
@@ -606,6 +615,8 @@ public struct PersonalCustomerIdentifyResponseData : Swift.Codable {
   public var addressLine3: Swift.String?
   public var city: Swift.String?
   public var country: Swift.String?
+  public var state: Swift.String?
+  public var postalCode: Swift.String?
   public var phone: Swift.String?
   public var district: Swift.String?
   public var fingerprintUsedForVerification: Swift.String?
@@ -617,8 +628,19 @@ public struct PersonalCustomerIdentifyResponseData : Swift.Codable {
 public struct FormDetailEnrollBiometricsResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
   public var verificationResultId: Swift.Int?
+  public var verificationResultDetails: [Swift.String : Any]?
   public var verificationResult: Swift.String?
   public var verificationResultCode: Swift.String?
+  public var faceMask: Swift.String?
+  public var faceMaskScore: Swift.Double?
+  public var liveFace: Swift.String?
+  public var realScore: Swift.Double?
+  public var headCovering: Swift.String?
+  public var headCoveringScore: Swift.Double?
+  public var eyeCovering: Swift.String?
+  public var eyeCoveringScore: Swift.Double?
+  public var cellPhone: Swift.String?
+  public var cellPhoneScore: Swift.Double?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
@@ -983,6 +1005,8 @@ public struct CustomerValidateIdResponse : Swift.Codable {
 extension IDentityMediumSDK.SelfieCapture {
   public struct Colors {
     public var instructionScreenBackgroundColor: UIKit.UIColor?
+    public var instructionScreenTextBackgroundColor: UIKit.UIColor?
+    public var instructionScreenBackButtonImageTintColor: UIKit.UIColor?
     public var instructionScreenImageTintColor: UIKit.UIColor?
     public var instructionScreenLabelTextColor: UIKit.UIColor?
     public var instructionScreenButtonTextColor: UIKit.UIColor?
@@ -1061,6 +1085,8 @@ public struct PersonalCustomerValidateIdFaceMatchResponseData : Swift.Codable {
   public var addressLine3: Swift.String?
   public var city: Swift.String?
   public var country: Swift.String?
+  public var state: Swift.String?
+  public var postalCode: Swift.String?
   public var lastName2: Swift.String?
   public var firstName: Swift.String?
   public var middleName: Swift.String?
@@ -1071,20 +1097,34 @@ public struct PersonalCustomerValidateIdFaceMatchResponseData : Swift.Codable {
   public var addressNonEng: Swift.String?
   public var addressLine1NonEng: Swift.String?
   public var addressLine2NonEng: Swift.String?
+  public var photoOnFile: Swift.String?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
 public struct FormDetailLiveCheckResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
   public var verificationResultId: Swift.Int?
+  public var verificationResultDetails: [Swift.String : Any]?
   public var verificationResult: Swift.String?
   public var verificationResultCode: Swift.String?
+  public var faceMask: Swift.String?
+  public var faceMaskScore: Swift.Double?
+  public var liveFace: Swift.String?
+  public var realScore: Swift.Double?
+  public var headCovering: Swift.String?
+  public var headCoveringScore: Swift.Double?
+  public var eyeCovering: Swift.String?
+  public var eyeCoveringScore: Swift.Double?
+  public var cellPhone: Swift.String?
+  public var cellPhoneScore: Swift.Double?
+  public var estimatedAge: Swift.Double?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
 public struct FormDetailIdentifyResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
   public var verificationResultId: Swift.Int?
+  public var verificationResultDetails: [Swift.String : Any]?
   public var verificationResult: Swift.String?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
@@ -1233,9 +1273,39 @@ public struct FingerPrintMetadata : Swift.Encodable {
   @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
+extension IDentityMediumSDK.IDError {
+  public enum Strings {
+    case jailbrokenDeviceDetected
+    case errorDownloadingSearchCompanyTemplateDetails
+    case errorDownloadingGetXsltData
+    case invalidURL
+    case gzipError
+    case gunzipError
+    case requiresRefresTokenOrCredentials
+    case invalidFormData
+    case invalidIdTypeCountryState
+    case canceled
+    case customerValidateIdRequestError
+    case customerLiveCheckRequestError
+    case customerEnrollBiometricsRequestError
+    case customerVerifyRequestError
+    case customerIdentifyRequestError
+    case customerValidateIdFaceMatchRequestError
+    case customerEnrollRequestError
+    case unknownError
+    public static func == (a: IDentityMediumSDK.IDError.Strings, b: IDentityMediumSDK.IDError.Strings) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  convenience public init(_ string: IDentityMediumSDK.IDError.Strings)
+}
 extension IDentityMediumSDK.IDCapture {
   public struct Colors {
     public var instructionScreenBackgroundColor: UIKit.UIColor?
+    public var instructionScreenTextBackgroundColor: UIKit.UIColor?
+    public var instructionScreenBackButtonImageTintColor: UIKit.UIColor?
     public var instructionScreenImageTintColor: UIKit.UIColor?
     public var instructionScreenLabelTextColor: UIKit.UIColor?
     public var instructionScreenButtonTextColor: UIKit.UIColor?
@@ -1270,6 +1340,8 @@ public struct PersonalCustomerValidateIdResponseData : Swift.Codable {
   public var addressLine3: Swift.String?
   public var city: Swift.String?
   public var country: Swift.String?
+  public var state: Swift.String?
+  public var postalCode: Swift.String?
   public var lastName2: Swift.String?
   public var firstName: Swift.String?
   public var middleName: Swift.String?
@@ -1327,7 +1399,6 @@ extension IDentityMediumSDK.IDCapture {
     public var moveCloser: Swift.String
     public var moveAway: Swift.String
     public var alignRectangle: Swift.String
-    public var notInFocus: Swift.String
     public var useFront: Swift.String
     public var makeSurePhotoTextVisible: Swift.String
     public var scanBarcode: Swift.String
@@ -1337,9 +1408,11 @@ extension IDentityMediumSDK.IDCapture {
     public var tooMuchGlare: Swift.String
     public var captureFront: Swift.String
     public var captureBack: Swift.String
+    public var autofillPrompt: Swift.String
     public var retryScreenText: Swift.String
     public var retryButtonText: Swift.String
     public var cancelButtonText: Swift.String
+    public mutating func reset()
   }
 }
 extension IDentityMediumSDK.DocumentCapture {
@@ -1378,6 +1451,8 @@ public struct PersonalCustomerEnrollResponseData : Swift.Codable {
   public var addressLine3: Swift.String?
   public var city: Swift.String?
   public var country: Swift.String?
+  public var state: Swift.String?
+  public var postalCode: Swift.String?
   public var lastName2: Swift.String?
   public var firstName: Swift.String?
   public var middleName: Swift.String?
@@ -1428,10 +1503,12 @@ public struct PersonalCustomerCommonRequestData1 : Swift.Encodable {
   public init(uniqueNumber: Swift.String? = nil, name: Swift.String? = nil, phone: Swift.String? = nil, email: Swift.String? = nil, dob: Swift.String? = nil, gender: IDentityMediumSDK.PersonalCustomerCommonRequestData1.Gender? = nil, addressLine1: Swift.String? = nil, addressLine2: Swift.String? = nil, city: Swift.String? = nil, district: Swift.String? = nil, country: Swift.String? = nil)
   public func encode(to encoder: Swift.Encoder) throws
 }
-extension CoreGraphics.CGRect {
-  public func rotatedCCW(in size: CoreGraphics.CGSize) -> CoreGraphics.CGRect
-  public func aspectFill(from size1: CoreGraphics.CGSize, to size2: CoreGraphics.CGSize) -> CoreGraphics.CGRect
-  public func expand(by factor: CoreGraphics.CGFloat) -> CoreGraphics.CGRect
+extension CoreFoundation.CGRect {
+  public func rotatedCCW(in size: CoreFoundation.CGSize) -> CoreFoundation.CGRect
+  public func aspectFill(from size1: CoreFoundation.CGSize, to size2: CoreFoundation.CGSize) -> CoreFoundation.CGRect
+  public func aspectFit(from size1: CoreFoundation.CGSize, to size2: CoreFoundation.CGSize) -> CoreFoundation.CGRect
+  public func expand(by factor: CoreFoundation.CGFloat) -> CoreFoundation.CGRect
+  public static func + (lhs: CoreFoundation.CGRect, rhs: CoreFoundation.CGVector) -> CoreFoundation.CGRect
 }
 extension IDentityMediumSDK.IDentitySDK {
   public static var templateModelBaseURL: Swift.String {
@@ -1454,7 +1531,7 @@ extension IDentityMediumSDK.IDentitySDK {
   public class func documentCapture(from presenter: UIKit.UIViewController, documentName name: Swift.String, uploadDocument: Swift.Bool = false, completion: @escaping IDentityMediumSDK.DocumentCaptureCompletion)
 }
 extension QuartzCore.CALayer {
-  public func draw(rect: CoreGraphics.CGRect, color: UIKit.UIColor)
+  public func draw(rect: CoreFoundation.CGRect, color: UIKit.UIColor)
   public func removeShapeSublayers()
 }
 public struct BiometricValidateIdFaceMatchData : Swift.Encodable {
@@ -1465,6 +1542,7 @@ public struct BiometricValidateIdFaceMatchData : Swift.Encodable {
 extension IDentityMediumSDK.IDCapture {
   public struct Images {
     public var instructionScreenImage: UIKit.UIImage?
+    public var instructionBackButtonImage: UIKit.UIImage?
     public var closeButtonImage: UIKit.UIImage?
     public var silhouetteImage: UIKit.UIImage?
     public var frontSilhouetteImage: UIKit.UIImage?
@@ -1515,6 +1593,7 @@ public struct IdDataResponse : Swift.Codable {
 extension IDentityMediumSDK.SelfieCapture {
   public struct Images {
     public var instructionScreenImage: UIKit.UIImage?
+    public var instructionBackButtonImage: UIKit.UIImage?
     public var closeButtonImage: UIKit.UIImage?
     public var silhouetteImage: UIKit.UIImage?
     public var bottomInfoImage: UIKit.UIImage?
@@ -1540,9 +1619,21 @@ public struct PersonalCustomerVerifyData : Swift.Encodable {
 public struct FormDetailCommonResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
   public var verificationResultId: Swift.Int?
+  public var verificationResultDetails: [Swift.String : Any]?
   public var verificationResult: Swift.String?
   public var verificationResultCode: Swift.String?
   public var faceVerificationResult: Swift.String?
+  public var faceVerificationScore: Swift.Double?
+  public var faceMask: Swift.String?
+  public var faceMaskScore: Swift.Double?
+  public var liveFace: Swift.String?
+  public var realScore: Swift.Double?
+  public var headCovering: Swift.String?
+  public var headCoveringScore: Swift.Double?
+  public var eyeCovering: Swift.String?
+  public var eyeCoveringScore: Swift.Double?
+  public var cellPhone: Swift.String?
+  public var cellPhoneScore: Swift.Double?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
@@ -1557,7 +1648,7 @@ public struct IDList {
     get
   }
 }
-extension CoreGraphics.CGSize {
+extension CoreFoundation.CGSize {
   public var resolution: Swift.String {
     get
   }
@@ -1573,6 +1664,7 @@ public protocol SelfieCaptureDelegate : AnyObject {
 }
 public enum SelfieCaptureState {
   case detectingFace
+  case multipleFacesDetected
   case moveCloser
   case moveAway
   case alignFace
@@ -1586,7 +1678,7 @@ public struct Selfie {
   public let image: UIKit.UIImage
   public let faceImage: UIKit.UIImage
   public let averageLiveness: Swift.Float
-  public let faceLocation: CoreGraphics.CGRect
+  public let faceLocation: CoreFoundation.CGRect
 }
 public class SelfieCapture {
   public static var options: IDentityMediumSDK.SelfieCapture.Options
@@ -1596,7 +1688,7 @@ public class SelfieCapture {
   public static var images: IDentityMediumSDK.SelfieCapture.Images
   public static var layout: IDentityMediumSDK.SelfieCapture.Layout
   weak public var delegate: IDentityMediumSDK.SelfieCaptureDelegate?
-  public init(overlayFrame: CoreGraphics.CGRect)
+  public init(overlayFrame: CoreFoundation.CGRect)
   public func retry()
   @objc deinit
 }
@@ -1622,8 +1714,6 @@ extension IDentityMediumSDK.IDCapture {
     public var lowerWidthThresholdTolerance: Swift.Float
     public var upperWidthThresholdTolerance: Swift.Float
     public var documentComponentConfidence: Swift.Float
-    public var focusThreshold: Swift.Float
-    public var minimumFocusThreshold: Swift.Float
     public var isDebugMode: Swift.Bool
     public var capture4K: Swift.Bool
     public var uploadIdData: Swift.Bool
@@ -1637,6 +1727,16 @@ public struct CustomerIdentifyResponse : Swift.Codable {
   public var responseCustomerData: IDentityMediumSDK.CustomerIdentifyDataResponse?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
+}
+public enum Language : Swift.String {
+  case none
+  case en
+  case es
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
 }
 public struct OcrMetadata : Swift.Encodable {
   public var idData: [Swift.String : Swift.String]
@@ -1684,7 +1784,6 @@ public enum InitializationStage : Swift.String {
   case classifierTrainingModelLabel
   case faceMaskTrainingModelLabel
   case docDetectionTrainingModelLabel
-  case focusTrainingModelLabel
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
@@ -1705,7 +1804,7 @@ public typealias ErrorCompletion = (Swift.Error?) -> Swift.Void
     get
   }
   weak public static var delegate: IDentityMediumSDK.InitializationDelegate?
-  public class func initializeSDK(loginId: Swift.String, password: Swift.String, merchantId: Swift.String, completion: @escaping IDentityMediumSDK.ErrorCompletion)
+  public class func initializeSDK(loginId: Swift.String, password: Swift.String, merchantId: Swift.String, language: IDentityMediumSDK.Language = .en, completion: @escaping IDentityMediumSDK.ErrorCompletion)
   @objc deinit
 }
 extension IDentityMediumSDK.IDentitySDK {
@@ -1716,9 +1815,6 @@ extension IDentityMediumSDK.IDentitySDK {
     get
   }
   public static var docDetectionModelName: Swift.String {
-    get
-  }
-  public static var focusModelName: Swift.String {
     get
   }
   public static var modelVersions: [Swift.String : Swift.String] {
@@ -1802,11 +1898,16 @@ extension IDentityMediumSDK.IdDataRequest.IdType : Swift.RawRepresentable {}
 extension IDentityMediumSDK.FingerPrintMetadata.Format : Swift.Equatable {}
 extension IDentityMediumSDK.FingerPrintMetadata.Format : Swift.Hashable {}
 extension IDentityMediumSDK.FingerPrintMetadata.Format : Swift.RawRepresentable {}
+extension IDentityMediumSDK.IDError.Strings : Swift.Equatable {}
+extension IDentityMediumSDK.IDError.Strings : Swift.Hashable {}
 extension IDentityMediumSDK.IDCapture.LabelPosition : Swift.Equatable {}
 extension IDentityMediumSDK.IDCapture.LabelPosition : Swift.Hashable {}
 extension IDentityMediumSDK.PersonalCustomerCommonRequestData1.Gender : Swift.Equatable {}
 extension IDentityMediumSDK.PersonalCustomerCommonRequestData1.Gender : Swift.Hashable {}
 extension IDentityMediumSDK.PersonalCustomerCommonRequestData1.Gender : Swift.RawRepresentable {}
+extension IDentityMediumSDK.Language : Swift.Equatable {}
+extension IDentityMediumSDK.Language : Swift.Hashable {}
+extension IDentityMediumSDK.Language : Swift.RawRepresentable {}
 extension IDentityMediumSDK.InitializationState : Swift.Equatable {}
 extension IDentityMediumSDK.InitializationState : Swift.Hashable {}
 extension IDentityMediumSDK.InitializationState : Swift.RawRepresentable {}

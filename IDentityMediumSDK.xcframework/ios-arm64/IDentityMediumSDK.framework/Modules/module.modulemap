@@ -6,6 +6,6 @@ framework module IDentityMediumSDK {
 }
 
 module IDentityMediumSDK.Swift {
-    header "IDentityMediumSDK-Swift.h"
-    requires objc
+  header "IDentityMediumSDK-Swift.h"
+  requires objc
 }
