@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
 // swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name IDentityMediumSDK
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
@@ -27,8 +27,8 @@ import _StringProcessing
 import zlib
 public struct CustomerVerifyDataResponse : Swift.Codable {
   public var extractedPersonalData: IDentityMediumSDK.PersonalCustomerVerifyResponseData?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @_hasMissingDesignatedInitializers @objc public class DetectedFingerPrintData : ObjectiveC.NSObject {
   @objc public var boxes: [CoreFoundation.CGFloat]
@@ -60,8 +60,8 @@ public struct FormDetailValidateIdResponseData : Swift.Codable {
   public var verificationResultDetails: [Swift.String : Any]?
   public var verificationResult: Swift.String?
   public var verificationResultCode: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension IDentityMediumSDK.SignatureCapture {
   public struct Colors {
@@ -80,8 +80,8 @@ extension IDentityMediumSDK.SignatureCapture {
 public struct CustomerEnrollDataResponse : Swift.Codable {
   public var extractedIdData: IDentityMediumSDK.IdDataResponse?
   public var extractedPersonalData: IDentityMediumSDK.PersonalCustomerEnrollResponseData?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension IDentityMediumSDK.Archive {
   final public func addEntry(with path: Swift.String, relativeTo baseURL: Foundation.URL, compressionMethod: IDentityMediumSDK.CompressionMethod = .none, bufferSize: Swift.Int = defaultWriteChunkSize, progress: Foundation.Progress? = nil) throws
@@ -92,8 +92,8 @@ extension IDentityMediumSDK.Archive {
 public struct SignatureData : Swift.Codable {
   public var signatureImage: Swift.String?
   public init(signatureImage: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct AdditionalCustomerEnrollBiometricRequestData : Swift.Encodable {
   public enum NeedImmediateResponse : Swift.String, Swift.Encodable {
@@ -120,7 +120,7 @@ public struct AdditionalCustomerEnrollBiometricRequestData : Swift.Encodable {
   public var metadata: IDentityMediumSDK.Metadata?
   public var ocrMetadata: IDentityMediumSDK.OcrMetadata?
   public init(uniqueRequestId: Swift.String = UUID().uuidString, needImmediateResponse: IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData.NeedImmediateResponse? = nil, deDuplicationRequired: IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData.DeDuplicationRequired? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension IDentityMediumSDK.DocumentCapture {
   public enum LabelPosition {
@@ -145,7 +145,7 @@ public struct BiometricVerifyRequestData : Swift.Encodable {
   public var fingerPrintData: IDentityMediumSDK.FingerPrintData?
   public var voiceData: Swift.String?
   public init(selfie: Swift.String, fingerPrintData: IDentityMediumSDK.FingerPrintData? = nil, voiceData: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct AdditionalCustomerWFlagCommonData : Swift.Encodable {
   public enum ManualReviewRequired : Swift.String, Swift.Encodable {
@@ -273,7 +273,7 @@ public struct AdditionalCustomerWFlagCommonData : Swift.Encodable {
   public var metadata: IDentityMediumSDK.Metadata?
   public var ocrMetadata: IDentityMediumSDK.OcrMetadata?
   public init(uniqueRequestId: Swift.String = UUID().uuidString, manualReviewRequired: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.ManualReviewRequired? = .no, bypassAgeValidation: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.BypassAgeValidation? = .no, deDuplicationRequired: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.DeDuplicationRequired? = .no, bypassNameMatching: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.BypassNameMatching? = .yes, postDataAPIRequired: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.PostDataAPIRequired? = .no, sendInputImagesInPost: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.SendInputImagesInPost? = .no, sendProcessedImagesInPost: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.SendProcessedImagesInPost? = .no, needImmediateResponse: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.NeedImmediateResponse? = .no, deduplicationSynchronous: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.DeduplicationSynchronous? = .no, verifyDataWithHost: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.VerifyDataWithHost? = .no, idBackImageRequired: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.IdBackImageRequired? = .yes, stripSpecialCharacters: IDentityMediumSDK.AdditionalCustomerWFlagCommonData.StripSpecialCharacters? = .yes)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public protocol DocumentCaptureDelegate : AnyObject {
   func updated(state: IDentityMediumSDK.DocumentCaptureState)
@@ -297,7 +297,7 @@ public class DocumentCapture {
   public static var fonts: IDentityMediumSDK.DocumentCapture.Fonts
   public static var images: IDentityMediumSDK.DocumentCapture.Images
   public static var layout: IDentityMediumSDK.DocumentCapture.Layout
-  weak public var delegate: IDentityMediumSDK.DocumentCaptureDelegate?
+  weak public var delegate: (any IDentityMediumSDK.DocumentCaptureDelegate)?
   public init(overlayFrame: CoreFoundation.CGRect)
   public func retry()
   @objc deinit
@@ -312,6 +312,7 @@ extension Foundation.NSNotification.Name {
 extension IDentityMediumSDK.DocumentCapture {
   public struct Images {
     public var instructionScreenImage: UIKit.UIImage?
+    public var instructionBackButtonImage: UIKit.UIImage?
     public var closeButtonImage: UIKit.UIImage?
     public var silhouetteImage: UIKit.UIImage?
     public var bottomInfoImage: UIKit.UIImage?
@@ -324,7 +325,7 @@ public struct CustomerValidateIdFaceMatchDataRequest : Swift.Encodable {
   public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public var biometericData: IDentityMediumSDK.BiometricValidateIdFaceMatchData
   public init(idData: IDentityMediumSDK.IdDataRequest, personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData1? = nil, additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, biometericData: IDentityMediumSDK.BiometricValidateIdFaceMatchData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension IDentityMediumSDK.SignatureCapture {
   public struct Images {
@@ -359,21 +360,21 @@ public struct PersonalCustomerCommonRequestData : Swift.Encodable {
   public var cardToken: Swift.String?
   public var cardLast4: Swift.String?
   public init(uniqueNumber: Swift.String, name: Swift.String? = nil, phone: Swift.String? = nil, email: Swift.String? = nil, dob: Swift.String? = nil, gender: IDentityMediumSDK.PersonalCustomerCommonRequestData.Gender? = nil, addressLine1: Swift.String? = nil, addressLine2: Swift.String? = nil, city: Swift.String? = nil, district: Swift.String? = nil, country: Swift.String? = nil, cardToken: Swift.String? = nil, cardLast4: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct CustomerValidateIdDataRequest : Swift.Encodable {
   public var idData: IDentityMediumSDK.IdDataRequest
   public var personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData1?
   public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public init(idData: IDentityMediumSDK.IdDataRequest, personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData1? = nil, additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct BiometricEnrollBiometricRequestData : Swift.Encodable {
   public var selfie: Swift.String?
   public var fingerPrintData: IDentityMediumSDK.FingerPrintData?
   public var voiceData: Swift.String?
   public init(selfie: Swift.String? = nil, fingerPrintData: IDentityMediumSDK.FingerPrintData? = nil, voiceData: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public let defaultReadChunkSize: Swift.Int
 public let defaultWriteChunkSize: Swift.Int
@@ -471,8 +472,8 @@ public struct StatusData : Swift.Codable {
   public var statusMessage: Swift.String?
   public var errorData: Swift.String?
   public var requestId: Swift.Int?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct Metadata : Swift.Encodable {
   public struct DetectedRect : Swift.Encodable {
@@ -481,7 +482,7 @@ public struct Metadata : Swift.Encodable {
     public var left: Swift.Float
     public var bottom: Swift.Float
     public init(detectedFrame: CoreFoundation.CGRect, fullImageSize: CoreFoundation.CGSize)
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
   }
   public struct Front : Swift.Encodable {
     public var operationTime: Swift.Int
@@ -490,7 +491,7 @@ public struct Metadata : Swift.Encodable {
     public var detectedRect: IDentityMediumSDK.Metadata.DetectedRect
     public var confidence: Swift.String
     public init(operationTime: Swift.Int, captureTime: Swift.Int, avgRealness: Swift.Float?, detectedRect: IDentityMediumSDK.Metadata.DetectedRect, confidence: Swift.Float)
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
   }
   public struct Back : Swift.Encodable {
     public var operationTime: Swift.Int
@@ -499,7 +500,7 @@ public struct Metadata : Swift.Encodable {
     public var detectedRect: IDentityMediumSDK.Metadata.DetectedRect
     public var confidence: Swift.String
     public init(operationTime: Swift.Int, captureTime: Swift.Int, avgRealness: Swift.Float?, detectedRect: IDentityMediumSDK.Metadata.DetectedRect, confidence: Swift.Float)
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
   }
   public struct Selfie : Swift.Encodable {
     public var avg_score: Swift.String
@@ -507,13 +508,13 @@ public struct Metadata : Swift.Encodable {
     public var captureTime: Swift.Int
     public var detectedRect: IDentityMediumSDK.Metadata.DetectedRect
     public init(avgLiveness: Swift.Float, operationTime: Swift.Int, captureTime: Swift.Int, detectedRect: IDentityMediumSDK.Metadata.DetectedRect)
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
   }
   public var front: [IDentityMediumSDK.Metadata.Front]?
   public var back: [IDentityMediumSDK.Metadata.Back]?
   public var selfie: [IDentityMediumSDK.Metadata.Selfie]?
   public init(front: [IDentityMediumSDK.Metadata.Front]? = nil, back: [IDentityMediumSDK.Metadata.Back]? = nil, selfie: [IDentityMediumSDK.Metadata.Selfie]? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public enum CompressionMethod : Swift.UInt16 {
   case none
@@ -535,8 +536,8 @@ extension Foundation.Data {
 public struct CustomerValidateIdFaceMatchDataResponse : Swift.Codable {
   public var extractedIdData: IDentityMediumSDK.IdDataResponse?
   public var extractedPersonalData: IDentityMediumSDK.PersonalCustomerValidateIdFaceMatchResponseData?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct Entry : Swift.Equatable {
   public enum EntryType : Swift.Int {
@@ -594,6 +595,7 @@ public enum IDCaptureState {
   case moveCloser
   case moveAway
   case alignRectangle
+  case notInFocus
   case detectedBox(IDentityMediumSDK.DetectedData)
   case classifiedDocument(IDentityMediumSDK.DetectedData)
   case success(IDentityMediumSDK.DetectedData)
@@ -607,6 +609,7 @@ public struct DebugData {
   public var faceLocation: CoreFoundation.CGRect?
   public var realnessScores: IDentityMediumSDK.RealnessScores?
   public var topClassifierResults: [(Swift.String, Swift.Float)]?
+  public var focusScore: Swift.Float?
 }
 public struct DetectedData {
   public enum DocumentSide {
@@ -652,7 +655,7 @@ public struct SelectedData {
 public struct AutofillResult : Swift.Encodable {
   public var mrzResult: IDentityMediumSDK.MRZResult?
   public var barcode: [Swift.String : Swift.String]?
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public class IDCapture {
   public var captureBack: Swift.Bool?
@@ -663,7 +666,7 @@ public class IDCapture {
   public static var fonts: IDentityMediumSDK.IDCapture.Fonts
   public static var images: IDentityMediumSDK.IDCapture.Images
   public static var layout: IDentityMediumSDK.IDCapture.Layout
-  weak public var delegate: IDentityMediumSDK.IDCaptureDelegate?
+  weak public var delegate: (any IDentityMediumSDK.IDCaptureDelegate)?
   public init(overlayFrame: CoreFoundation.CGRect, isVideoCapture: Swift.Bool = false)
   public func typeMismatch()
   public func retry()
@@ -709,7 +712,7 @@ public struct AdditionalCustomerCommonData : Swift.Encodable {
   public var metadata: IDentityMediumSDK.Metadata?
   public var ocrMetadata: IDentityMediumSDK.OcrMetadata?
   public init(uniqueRequestId: Swift.String)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension IDentityMediumSDK.DocumentCapture {
   public struct Strings {
@@ -738,8 +741,8 @@ extension IDentityMediumSDK.FingerPrintCapture {
 }
 public struct CustomerIdentifyDataResponse : Swift.Codable {
   public var extractedPersonalData: IDentityMediumSDK.PersonalCustomerIdentifyResponseData?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct FormDetailVerifyResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
@@ -747,15 +750,15 @@ public struct FormDetailVerifyResponseData : Swift.Codable {
   public var verificationResultDetails: [Swift.String : Any]?
   public var verificationResult: Swift.String?
   public var verificationResultCode: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct CustomerVerifyDataRequest : Swift.Encodable {
   public var personalData: IDentityMediumSDK.PersonalCustomerVerifyData
   public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public var biometericData: IDentityMediumSDK.BiometricVerifyRequestData
   public init(personalData: IDentityMediumSDK.PersonalCustomerVerifyData, additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, biometricData: IDentityMediumSDK.BiometricVerifyRequestData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public enum CameraPosition {
   case back, front
@@ -808,8 +811,8 @@ public struct PersonalCustomerVerifyResponseData : Swift.Codable {
   public var district: Swift.String?
   public var enrolledDate: Swift.String?
   public var enrolledFaceImage: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension Foundation.FileManager {
   public class var documentDirectory: Foundation.URL {
@@ -835,8 +838,8 @@ public struct PersonalCustomerIdentifyResponseData : Swift.Codable {
   public var fingerprintUsedForVerification: Swift.String?
   public var enrolledDate: Swift.String?
   public var enrolledFaceImage: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct FormDetailEnrollBiometricsResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
@@ -854,15 +857,15 @@ public struct FormDetailEnrollBiometricsResponseData : Swift.Codable {
   public var eyeCoveringScore: Swift.Double?
   public var cellPhone: Swift.String?
   public var cellPhoneScore: Swift.Double?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct CustomerEnrollBiometricsRequest : Swift.Encodable {
   public var securityData: IDentityMediumSDK.SecurityData
   public var customerData: IDentityMediumSDK.CustomerEnrollBiometricDataRequest
   public var additionalData: IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData
   public init(securityData: IDentityMediumSDK.SecurityData, customerData: IDentityMediumSDK.CustomerEnrollBiometricDataRequest, additionalData: IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct CustomerEnrollRequest : Swift.Encodable {
   public var securityData: IDentityMediumSDK.SecurityData
@@ -871,16 +874,16 @@ public struct CustomerEnrollRequest : Swift.Encodable {
   public var signature: IDentityMediumSDK.SignatureData?
   public var employee: IDentityMediumSDK.EmployeeData?
   public init(securityData: IDentityMediumSDK.SecurityData, customerData: IDentityMediumSDK.CustomerEnrollDataRequest, additionalData: IDentityMediumSDK.AdditionalCustomerWFlagCommonData, signature: IDentityMediumSDK.SignatureData? = nil, employee: IDentityMediumSDK.EmployeeData? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public typealias HostdataResponse = [Swift.String : Any]
-public typealias ValidateIdAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerValidateIdResponse, Swift.Error>, _ hostData: IDentityMediumSDK.HostdataResponse?) -> Swift.Void
-public typealias LiveFaceCheckAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerLiveCheckResponse, Swift.Error>) -> Swift.Void
-public typealias ValidateIdMatchFaceAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerValidateIdFaceMatchResponse, Swift.Error>, _ hostData: IDentityMediumSDK.HostdataResponse?) -> Swift.Void
-public typealias ValidateIdCustomerEnrollAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerEnrollResponse, Swift.Error>, _ hostData: IDentityMediumSDK.HostdataResponse?) -> Swift.Void
-public typealias CustomerEnrollBiometricsAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerEnrollBiometricResponse, Swift.Error>) -> Swift.Void
-public typealias CustomerVerificationAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerVerifyResponse, Swift.Error>) -> Swift.Void
-public typealias CustomerIdentifyAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerIdentifyResponse, Swift.Error>) -> Swift.Void
+public typealias ValidateIdAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerValidateIdResponse, any Swift.Error>, _ hostData: IDentityMediumSDK.HostdataResponse?) -> Swift.Void
+public typealias LiveFaceCheckAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerLiveCheckResponse, any Swift.Error>) -> Swift.Void
+public typealias ValidateIdMatchFaceAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerValidateIdFaceMatchResponse, any Swift.Error>, _ hostData: IDentityMediumSDK.HostdataResponse?) -> Swift.Void
+public typealias ValidateIdCustomerEnrollAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerEnrollResponse, any Swift.Error>, _ hostData: IDentityMediumSDK.HostdataResponse?) -> Swift.Void
+public typealias CustomerEnrollBiometricsAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerEnrollBiometricResponse, any Swift.Error>) -> Swift.Void
+public typealias CustomerVerificationAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerVerifyResponse, any Swift.Error>) -> Swift.Void
+public typealias CustomerIdentifyAPICompletion = (_ result: Swift.Result<IDentityMediumSDK.CustomerIdentifyResponse, any Swift.Error>) -> Swift.Void
 extension IDentityMediumSDK.IDentitySDK {
   public class func post(validateId request: IDentityMediumSDK.CustomerValidateIdRequest, completion: @escaping IDentityMediumSDK.ValidateIdAPICompletion)
   public class func post(liveFaceCheck request: IDentityMediumSDK.CustomerLiveCheckRequest, completion: @escaping IDentityMediumSDK.LiveFaceCheckAPICompletion)
@@ -917,19 +920,19 @@ public struct FingerPrint : Swift.Encodable {
   public var imageHashValue: Swift.String?
   public var nfiq: Swift.String?
   public init(fpData: Swift.String, fpPosition: IDentityMediumSDK.FingerPrint.Position, imageHashValue: Swift.String? = nil, nfiq: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct CustomerEnrollBiometricDataRequest : Swift.Encodable {
   public var personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData
   public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public var biometericData: IDentityMediumSDK.BiometricEnrollBiometricRequestData
   public init(personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData, additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, biometricData: IDentityMediumSDK.BiometricEnrollBiometricRequestData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct BiometricLiveCheckData : Swift.Encodable {
   public var selfie: Swift.String
   public init(selfie: Swift.String)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public typealias BoolCompletion = (Swift.Bool) -> Swift.Void
 public protocol CaptureSessionDelegate : AnyObject {
@@ -949,7 +952,7 @@ public enum CaptureMode {
 }
 @objc @_inheritsConvenienceInitializers public class CaptureSession : ObjectiveC.NSObject {
   final public let videoDataOutput: AVFoundation.AVCaptureVideoDataOutput
-  weak public var delegate: IDentityMediumSDK.CaptureSessionDelegate?
+  weak public var delegate: (any IDentityMediumSDK.CaptureSessionDelegate)?
   public var cameraPosition: AVFoundation.AVCaptureDevice.Position
   public var captureMode: IDentityMediumSDK.CaptureMode {
     get
@@ -1119,7 +1122,7 @@ public struct XMLAttribute {
   public var innerXML: Swift.String {
     get
   }
-  public var children: [IDentityMediumSDK.XMLContent]
+  public var children: [any IDentityMediumSDK.XMLContent]
   @objc deinit
 }
 extension IDentityMediumSDK.TextElement : Swift.CustomStringConvertible {
@@ -1154,15 +1157,15 @@ extension IDentityMediumSDK.XMLElement {
 public struct CustomerDataValidateIdResponse : Swift.Codable {
   public var extractedIdData: IDentityMediumSDK.IdDataResponse?
   public var extractedPersonalData: IDentityMediumSDK.PersonalCustomerValidateIdResponseData?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct CustomerVerifyRequest : Swift.Encodable {
   public var securityData: IDentityMediumSDK.SecurityData
   public var customerData: IDentityMediumSDK.CustomerVerifyDataRequest
   public var additionalData: IDentityMediumSDK.AdditionalCustomerCommonData
   public init(securityData: IDentityMediumSDK.SecurityData, customerData: IDentityMediumSDK.CustomerVerifyDataRequest, additionalData: IDentityMediumSDK.AdditionalCustomerCommonData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension IDentityMediumSDK.FingerPrintCapture {
   public struct Fonts {
@@ -1172,8 +1175,8 @@ public struct CustomerVerifyResponse : Swift.Codable {
   public var status: IDentityMediumSDK.StatusData?
   public var resultData: IDentityMediumSDK.FormDetailVerifyResponseData?
   public var responseCustomerVerifyData: IDentityMediumSDK.CustomerVerifyDataResponse?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension Foundation.Data {
   public var floats: [Swift.Float]? {
@@ -1189,7 +1192,7 @@ extension Foundation.Data {
 public struct EmployeeData : Swift.Encodable {
   public var companyId: Swift.String?
   public init(companyId: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct CustomerEnrollDataRequest : Swift.Encodable {
   public var idData: IDentityMediumSDK.IdDataRequest
@@ -1197,7 +1200,7 @@ public struct CustomerEnrollDataRequest : Swift.Encodable {
   public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public var biometericData: IDentityMediumSDK.BiometricEnrollData
   public init(idData: IDentityMediumSDK.IdDataRequest, personalData: IDentityMediumSDK.PersonalCustomerCommonRequestData, additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, biometricData: IDentityMediumSDK.BiometricEnrollData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) public class var storyboardIdentifier: Swift.String {
@@ -1227,7 +1230,7 @@ public struct BiometricEnrollData : Swift.Encodable {
   public var fingerPrintData: IDentityMediumSDK.FingerPrintData?
   public var voiceData: Swift.String?
   public init(selfie: Swift.String, fingerPrintData: IDentityMediumSDK.FingerPrintData? = nil, voiceData: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public enum Language : Swift.String {
   case none
@@ -1248,14 +1251,14 @@ public struct SecurityData : Swift.Encodable {
   public var password: Swift.String
   public var merchantId: Swift.Int
   public init(userName: Swift.String, password: Swift.String, merchantId: Swift.Int)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct CustomerValidateIdResponse : Swift.Codable {
   public var status: IDentityMediumSDK.StatusData?
   public var resultData: IDentityMediumSDK.FormDetailValidateIdResponseData?
   public var responseCustomerData: IDentityMediumSDK.CustomerDataValidateIdResponse?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension IDentityMediumSDK.SelfieCapture {
   public struct Colors {
@@ -1314,6 +1317,10 @@ extension IDentityMediumSDK.SelfieCapture {
     public var capture4K: Swift.Bool
     public var uploadFaceData: Swift.Bool
     public var enableInstructionScreen: Swift.Bool
+    public var ovalScaleMultiplier: Swift.Float {
+      get
+      set
+    }
   }
 }
 public struct CustomerIdentifyRequest : Swift.Encodable {
@@ -1321,12 +1328,12 @@ public struct CustomerIdentifyRequest : Swift.Encodable {
   public var biometericData: IDentityMediumSDK.BiometricIdentifyData
   public var additionalData: IDentityMediumSDK.AdditionalCustomerCommonData
   public init(securityData: IDentityMediumSDK.SecurityData, biometricData: IDentityMediumSDK.BiometricIdentifyData, additionalData: IDentityMediumSDK.AdditionalCustomerCommonData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct AdditionalCustomerLiveCheckResponseData : Swift.Codable {
   public var liveFaceDetectionFlag: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension IDentityMediumSDK.FingerPrintCapture {
   public struct Options {
@@ -1377,8 +1384,8 @@ public struct PersonalCustomerValidateIdFaceMatchResponseData : Swift.Codable {
   public var addressLine1NonEng: Swift.String?
   public var addressLine2NonEng: Swift.String?
   public var photoOnFile: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct FormDetailLiveCheckResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
@@ -1397,23 +1404,23 @@ public struct FormDetailLiveCheckResponseData : Swift.Codable {
   public var cellPhone: Swift.String?
   public var cellPhoneScore: Swift.Double?
   public var estimatedAge: Swift.Double?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct FormDetailIdentifyResponseData : Swift.Codable {
   public var uniqueRequestId: Swift.String?
   public var verificationResultId: Swift.Int?
   public var verificationResultDetails: [Swift.String : Any]?
   public var verificationResult: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct CustomerLiveCheckResponse : Swift.Codable {
   public var status: IDentityMediumSDK.StatusData?
   public var resultData: IDentityMediumSDK.FormDetailLiveCheckResponseData?
   public var additionalData: IDentityMediumSDK.AdditionalCustomerLiveCheckResponseData?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct IdDataRequest : Swift.Encodable {
   public enum IdType : Swift.String, Swift.Encodable {
@@ -1445,7 +1452,7 @@ public struct IdDataRequest : Swift.Encodable {
   public var idImageFront: Swift.String
   public var idImageBack: Swift.String?
   public init(idType: IDentityMediumSDK.IdDataRequest.IdType, idCountry: Swift.String, idState: Swift.String? = nil, idImageFront: Swift.String, idImageBack: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public class FingerPrintCapture {
   public static var options: IDentityMediumSDK.FingerPrintCapture.Options
@@ -1461,11 +1468,12 @@ public struct CustomerLiveCheckDataRequest : Swift.Encodable {
   public var additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]?
   public var biometericData: IDentityMediumSDK.BiometricLiveCheckData
   public init(additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, biometericData: IDentityMediumSDK.BiometricLiveCheckData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension IDentityMediumSDK.DocumentCapture {
   public struct Colors {
     public var instructionScreenBackgroundColor: UIKit.UIColor?
+    public var instructionScreenBackButtonImageTintColor: UIKit.UIColor?
     public var instructionScreenImageTintColor: UIKit.UIColor?
     public var instructionScreenLabelTextColor: UIKit.UIColor?
     public var instructionScreenButtonTextColor: UIKit.UIColor?
@@ -1519,22 +1527,22 @@ public struct DeDuplicationResponseData : Swift.Codable {
   public var duplicateVoiceMatchScore: Swift.String?
   public var duplicateFrontImage: Swift.String?
   public var duplicateBackImage: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct BiometricIdentifyData : Swift.Encodable {
   public var selfie: Swift.String
   public var fingerPrintData: IDentityMediumSDK.FingerPrintData?
   public var voiceData: Swift.String?
   public init(selfie: Swift.String, fingerPrintData: IDentityMediumSDK.FingerPrintData? = nil, voiceData: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct CustomerValidateIdRequest : Swift.Encodable {
   public var securityData: IDentityMediumSDK.SecurityData
   public var customerData: IDentityMediumSDK.CustomerValidateIdDataRequest
   public var additionalData: IDentityMediumSDK.AdditionalCustomerWFlagCommonData
   public init(securityData: IDentityMediumSDK.SecurityData, customerData: IDentityMediumSDK.CustomerValidateIdDataRequest, additionalData: IDentityMediumSDK.AdditionalCustomerWFlagCommonData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct MRZResult : Swift.Encodable {
   public var dictionary: [Swift.String : Swift.String] {
@@ -1546,7 +1554,7 @@ public struct MRZResult : Swift.Encodable {
   public var expiryDateString: Swift.String? {
     get
   }
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension IDentityMediumSDK.MRZResult : Swift.Equatable {
   public static func == (lhs: IDentityMediumSDK.MRZResult, rhs: IDentityMediumSDK.MRZResult) -> Swift.Bool
@@ -1567,7 +1575,7 @@ public struct FingerPrintMetadata : Swift.Encodable {
   public var serialNumber: Swift.String?
   public var backgroundColor: Swift.String?
   public init(format: IDentityMediumSDK.FingerPrintMetadata.Format, model: Swift.String? = nil, serialNumber: Swift.String? = nil, backgroundColor: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @objc @_inheritsConvenienceInitializers public class IDError : Foundation.NSError {
   convenience public init(_ localizedDescription: Swift.String)
@@ -1654,8 +1662,8 @@ public struct PersonalCustomerValidateIdResponseData : Swift.Codable {
   public var addressNonEng: Swift.String?
   public var addressLine1NonEng: Swift.String?
   public var addressLine2NonEng: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension Foundation.Data {
   @available(*, deprecated, message: "Please use `Int64` for `size` and provider `position`.")
@@ -1668,14 +1676,14 @@ public struct CustomerEnrollResponse : Swift.Codable {
   public var resultData: IDentityMediumSDK.FormDetailCommonResponseData?
   public var deDuplicationData: [IDentityMediumSDK.DeDuplicationResponseData]?
   public var responseCustomerData: IDentityMediumSDK.CustomerEnrollDataResponse?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct FingerPrintData : Swift.Encodable {
   public var fingerPrints: [IDentityMediumSDK.FingerPrint]
   public var metadata: IDentityMediumSDK.FingerPrintMetadata
   public init(fingerPrints: [IDentityMediumSDK.FingerPrint], metadata: IDentityMediumSDK.FingerPrintMetadata)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension IDentityMediumSDK.FingerPrintCapture {
   public enum LabelPosition {
@@ -1710,8 +1718,8 @@ public struct CustomerValidateIdFaceMatchResponse : Swift.Codable {
   public var status: IDentityMediumSDK.StatusData?
   public var resultData: IDentityMediumSDK.FormDetailCommonResponseData?
   public var responseCustomerData: IDentityMediumSDK.CustomerValidateIdFaceMatchDataResponse?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension IDentityMediumSDK.IDCapture {
   public struct Strings {
@@ -1721,6 +1729,7 @@ extension IDentityMediumSDK.IDCapture {
     public var moveCloser: Swift.String
     public var moveAway: Swift.String
     public var alignRectangle: Swift.String
+    public var notInFocus: Swift.String
     public var useFront: Swift.String
     public var makeSurePhotoTextVisible: Swift.String
     public var scanBarcode: Swift.String
@@ -1753,8 +1762,8 @@ public struct State : Swift.Codable {
   public var stateCode: Swift.String
   public var countryCode: Swift.String
   public var stateName: Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct StateList {
   public static var states: [IDentityMediumSDK.State] {
@@ -1785,21 +1794,21 @@ public struct PersonalCustomerEnrollResponseData : Swift.Codable {
   public var addressNonEng: Swift.String?
   public var addressLine1NonEng: Swift.String?
   public var addressLine2NonEng: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct AdditionalCustomerLiveCheckData : Swift.Encodable {
   public var uniqueRequestId: Swift.String
   public var metadata: IDentityMediumSDK.Metadata?
   public var ocrMetadata: IDentityMediumSDK.OcrMetadata?
   public init(uniqueRequestId: Swift.String)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct AdditionalDocumentsRequest : Swift.Encodable {
   public var documentName: Swift.String
   public var additionalDocument: Swift.String
   public init(documentName: Swift.String, additionalDocument: Swift.String)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct PersonalCustomerCommonRequestData1 : Swift.Encodable {
   public enum Gender : Swift.String, Swift.Encodable {
@@ -1823,7 +1832,7 @@ public struct PersonalCustomerCommonRequestData1 : Swift.Encodable {
   public var district: Swift.String?
   public var country: Swift.String?
   public init(uniqueNumber: Swift.String? = nil, name: Swift.String? = nil, phone: Swift.String? = nil, email: Swift.String? = nil, dob: Swift.String? = nil, gender: IDentityMediumSDK.PersonalCustomerCommonRequestData1.Gender? = nil, addressLine1: Swift.String? = nil, addressLine2: Swift.String? = nil, city: Swift.String? = nil, district: Swift.String? = nil, country: Swift.String? = nil)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension CoreFoundation.CGRect {
   public func rotatedCCW(in size: CoreFoundation.CGSize) -> CoreFoundation.CGRect
@@ -1855,7 +1864,7 @@ public class QKMRZParser {
   public func parse(mrzString: Swift.String) -> IDentityMediumSDK.QKMRZResult?
   @objc deinit
 }
-public typealias DocumentCaptureCompletion = (_ result: Swift.Result<IDentityMediumSDK.AdditionalDocumentsRequest, Swift.Error>) -> Swift.Void
+public typealias DocumentCaptureCompletion = (_ result: Swift.Result<IDentityMediumSDK.AdditionalDocumentsRequest, any Swift.Error>) -> Swift.Void
 extension IDentityMediumSDK.IDentitySDK {
   public class func documentCapture(from presenter: UIKit.UIViewController, documentName name: Swift.String, uploadDocument: Swift.Bool = false, completion: @escaping IDentityMediumSDK.DocumentCaptureCompletion)
 }
@@ -1866,7 +1875,7 @@ extension QuartzCore.CALayer {
 public struct BiometricValidateIdFaceMatchData : Swift.Encodable {
   public var selfie: Swift.String
   public init(selfie: Swift.String)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension IDentityMediumSDK.IDCapture {
   public struct Images {
@@ -1928,8 +1937,8 @@ public struct IdDataResponse : Swift.Codable {
   public var idIssueDateNonEng: Swift.String?
   public var barcodeDataParsed: Swift.String?
   public var photoOnId: Swift.String?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension IDentityMediumSDK.SelfieCapture {
   public struct Images {
@@ -1955,7 +1964,7 @@ extension IDentityMediumSDK.IDCapture {
 public struct PersonalCustomerVerifyData : Swift.Encodable {
   public var uniqueNumber: Swift.String
   public init(uniqueNumber: Swift.String)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public class MetalBilinearScaler {
   public init()
@@ -1979,15 +1988,15 @@ public struct FormDetailCommonResponseData : Swift.Codable {
   public var eyeCoveringScore: Swift.Double?
   public var cellPhone: Swift.String?
   public var cellPhoneScore: Swift.Double?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public typealias FILEPointer = Swift.UnsafeMutablePointer<Darwin.FILE>
 public struct IDType : Swift.Codable {
   public var idTypeCode: Swift.String
   public var idTypeDesc: Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct IDList {
   public static var idTypes: [IDentityMediumSDK.IDType] {
@@ -2033,7 +2042,7 @@ public class SelfieCapture {
   public static var fonts: IDentityMediumSDK.SelfieCapture.Fonts
   public static var images: IDentityMediumSDK.SelfieCapture.Images
   public static var layout: IDentityMediumSDK.SelfieCapture.Layout
-  weak public var delegate: IDentityMediumSDK.SelfieCaptureDelegate?
+  weak public var delegate: (any IDentityMediumSDK.SelfieCaptureDelegate)?
   public init(overlayFrame: CoreFoundation.CGRect, isVideoCapture: Swift.Bool = false)
   public func retry()
   @objc deinit
@@ -2059,7 +2068,7 @@ public struct CustomerValidateIdFaceMatchRequest : Swift.Encodable {
   public var customerData: IDentityMediumSDK.CustomerValidateIdFaceMatchDataRequest
   public var additionalData: IDentityMediumSDK.AdditionalCustomerWFlagCommonData
   public init(securityData: IDentityMediumSDK.SecurityData, customerData: IDentityMediumSDK.CustomerValidateIdFaceMatchDataRequest, additionalData: IDentityMediumSDK.AdditionalCustomerWFlagCommonData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension IDentityMediumSDK.IDCapture {
   public struct Options {
@@ -2075,32 +2084,33 @@ extension IDentityMediumSDK.IDCapture {
     public var uploadIdData: Swift.Bool
     public var enableRealId: Swift.Bool
     public var enableInstructionScreen: Swift.Bool
+    public var focusThreshold: Swift.Float
   }
 }
 public struct CustomerIdentifyResponse : Swift.Codable {
   public var status: IDentityMediumSDK.StatusData?
   public var resultData: IDentityMediumSDK.FormDetailIdentifyResponseData?
   public var responseCustomerData: IDentityMediumSDK.CustomerIdentifyDataResponse?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct OcrMetadata : Swift.Encodable {
   public var idData: [Swift.String : Swift.String]
   public init(idData: [Swift.String : Swift.String])
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct CustomerLiveCheckRequest : Swift.Encodable {
   public var securityData: IDentityMediumSDK.SecurityData
   public var customerData: IDentityMediumSDK.CustomerLiveCheckDataRequest
   public var additionalData: IDentityMediumSDK.AdditionalCustomerLiveCheckData
   public init(securityData: IDentityMediumSDK.SecurityData, customerData: IDentityMediumSDK.CustomerLiveCheckDataRequest, additionalData: IDentityMediumSDK.AdditionalCustomerLiveCheckData)
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct Country : Swift.Codable {
   public var countryCode: Swift.String
   public var countryName: Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct CountryList {
   public static var countries: [IDentityMediumSDK.Country] {
@@ -2130,6 +2140,8 @@ public enum InitializationStage : Swift.String {
   case classifierTrainingModelLabel
   case faceMaskTrainingModelLabel
   case docDetectionTrainingModelLabel
+  case fingerprintDetectionTrainingModelLabel
+  case focusTrainingModelLabel
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
@@ -2139,7 +2151,7 @@ public enum InitializationStage : Swift.String {
 public protocol InitializationDelegate : AnyObject {
   func updateInitialization(stage: IDentityMediumSDK.InitializationStage, state: IDentityMediumSDK.InitializationState)
 }
-public typealias ErrorCompletion = (Swift.Error?) -> Swift.Void
+public typealias ErrorCompletion = ((any Swift.Error)?) -> Swift.Void
 @_hasMissingDesignatedInitializers public class IDentitySDK {
   public struct LoginCredentials {
     public let loginId: Swift.String
@@ -2149,7 +2161,7 @@ public typealias ErrorCompletion = (Swift.Error?) -> Swift.Void
   public static var loginCredentials: IDentityMediumSDK.IDentitySDK.LoginCredentials? {
     get
   }
-  weak public static var delegate: IDentityMediumSDK.InitializationDelegate?
+  weak public static var delegate: (any IDentityMediumSDK.InitializationDelegate)?
   public class func initializeSDK(loginId: Swift.String, password: Swift.String, merchantId: Swift.String, language: IDentityMediumSDK.Language = .en, completion: @escaping IDentityMediumSDK.ErrorCompletion)
   @objc deinit
 }
@@ -2161,6 +2173,12 @@ extension IDentityMediumSDK.IDentitySDK {
     get
   }
   public static var docDetectionModelName: Swift.String {
+    get
+  }
+  public static var fingerprintDetectionModelName: Swift.String {
+    get
+  }
+  public static var focusModelName: Swift.String {
     get
   }
   public static var modelVersions: [Swift.String : Swift.String] {
@@ -2175,8 +2193,8 @@ public struct CustomerEnrollBiometricResponse : Swift.Codable {
   public var status: IDentityMediumSDK.StatusData?
   public var resultData: IDentityMediumSDK.FormDetailEnrollBiometricsResponseData?
   public var deDuplicationData: [IDentityMediumSDK.DeDuplicationResponseData]?
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData.NeedImmediateResponse : Swift.Equatable {}
 extension IDentityMediumSDK.AdditionalCustomerEnrollBiometricRequestData.NeedImmediateResponse : Swift.Hashable {}

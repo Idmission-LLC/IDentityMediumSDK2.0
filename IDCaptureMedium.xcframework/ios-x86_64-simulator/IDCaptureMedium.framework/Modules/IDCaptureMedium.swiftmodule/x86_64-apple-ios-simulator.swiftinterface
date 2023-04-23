@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
 // swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name IDCaptureMedium
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import AudioToolbox
@@ -15,8 +15,8 @@ public struct ValidateIdResult {
   public var back: IDentityMediumSDK.DetectedData?
   public func submit(additionalDocuments: [IDentityMediumSDK.AdditionalDocumentsRequest]? = nil, completion: @escaping IDentityMediumSDK.ValidateIdAPICompletion)
 }
-public typealias ValidateIdCompletion = (_ result: Swift.Result<IDCaptureMedium.ValidateIdResult, Swift.Error>) -> Swift.Void
-public typealias AutofillCompletion = (_ result: Swift.Result<IDentityMediumSDK.AutofillResult, Swift.Error>) -> Swift.Void
+public typealias ValidateIdCompletion = (_ result: Swift.Result<IDCaptureMedium.ValidateIdResult, any Swift.Error>) -> Swift.Void
+public typealias AutofillCompletion = (_ result: Swift.Result<IDentityMediumSDK.AutofillResult, any Swift.Error>) -> Swift.Void
 extension IDentityMediumSDK.IDentitySDK {
   public static var customerValidateIdRequest: IDentityMediumSDK.CustomerValidateIdRequest?
   public class func idValidation(from presenter: UIKit.UIViewController, options: IDentityMediumSDK.AdditionalCustomerWFlagCommonData, captureBack: Swift.Bool = true, completion: @escaping IDCaptureMedium.ValidateIdCompletion)
