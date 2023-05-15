@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
 
   spec.name         = "SignatureCaptureMedium"
-  spec.version      = "9.5.2.2.3"
+  spec.version      = "9.5.3.2.3"
   spec.summary      = "SignatureCaptureMedium lets user add SignatureCaptureMediumSDK in their project"
   spec.description  = <<-DESC 
                     SignatureCaptureMedium helps user to add SignatureCaptureMediumSDK in their project.
